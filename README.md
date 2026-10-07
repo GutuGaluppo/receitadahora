@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Receita da Hora
 
-## Getting Started
+> **O que faz sentido comer agora?** Uma sugestão por vez, feita para o seu momento.
 
-First, run the development server:
+Web app responsivo (Next.js 16 · React 19 · TypeScript · Tailwind 4 · Framer Motion). A especificação completa está em [`docs/receita_da_hora_master_implementation_prompt.md`](docs/receita_da_hora_master_implementation_prompt.md).
+
+## Rodando
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install --legacy-peer-deps
+npm run dev      # http://localhost:3000
+npm run check    # lint + tsc + testes
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Estrutura
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Pasta | O que tem |
+|---|---|
+| `src/services/recommendation.ts` | Motor determinístico: hard stops → score por camadas → diversidade → top 1 |
+| `src/config/recommendation-weights.ts` | **Todos** os pesos (nada hardcoded no serviço) |
+| `src/data/recipes.ts`, `palettes.ts` | 35 receitas curadas com traits, afinidade climática e paleta |
+| `src/services/weather.ts` | Clima desacoplado (Open-Meteo, sem chave de API) |
+| `src/services/storage.ts` | Persistência local-first validada com Zod (fronteira para trocar por Supabase) |
+| `src/components/` | Home (máquina de estados), Biblioteca, Meu Gosto, Onboarding |
+| `supabase/schema.sql` | Schema + RLS para a persistência em nuvem |
+| `tests/` | Testes unitários do motor |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Decisões que valem saber
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Persistência**: hoje em `localStorage`, sem login. `supabase/schema.sql` já está pronto; falta criar o projeto Supabase, colocar `SUPABASE_URL`/`SUPABASE_KEY` e implementar o adaptador em `storage.ts`.
+- **Imagens**: as receitas usam um prato ilustrado gerado da paleta. Para fotos reais, preencha `imageUrl` com um PNG/WebP **recortado** (fundo transparente) — o componente já aplica a sombra suave.
+- **Clima**: Open-Meteo (gratuito). Só a cidade é guardada; coordenadas existem apenas durante a chamada.
+- **Intenção temporária** ("Outra sugestão"): fica só em memória, expira em 30 min e nunca altera o perfil.
+- **LGPD**: "Meu Gosto" tem exportar e apagar dados.

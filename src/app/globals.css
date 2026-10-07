@@ -1,26 +1,76 @@
 @import "tailwindcss";
 
+/* Cores dinâmicas por receita: o wrapper do app define estas variáveis. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #f4e8d6;
+  --bg2: #ebd2b0;
+  --accent: #c8663d;
+  --strong: #9e4325;
+  --fg: #3b2417;
+  --muted: #6e5342;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--bg);
+  --color-paper2: var(--bg2);
+  --color-accent: var(--accent);
+  --color-strong: var(--strong);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--bg);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  transition:
+    color 600ms var(--ease),
+    background-color 600ms var(--ease);
+}
+
+button {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+:focus-visible {
+  outline: 2px solid var(--strong);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.themed {
+  transition:
+    color 600ms var(--ease),
+    background-color 600ms var(--ease),
+    border-color 600ms var(--ease);
+}
+
+.lib-icon {
+  transition: filter 200ms ease;
+}
+.lib-icon:hover {
+  filter: brightness(1.12);
+}
+
+/* Redução de movimento: sem slides/translates; fades curtos continuam. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
