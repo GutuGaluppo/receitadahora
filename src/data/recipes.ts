@@ -1,7 +1,12 @@
 import type { MealType, Recipe } from "@/types";
 import { PALETTES, type PaletteName } from "./palettes";
 
-type Ing = [item: string, quantity: number, unit: string];
+/** Fotos recortadas disponíveis em /public/recipes. As demais usam a ilustração gerada. */
+const IMAGES: Record<string, string> = {
+  "pasta-cremosa-abobora": "/recipes/pasta-cremosa-abobora.webp",
+};
+
+type Ing = [item: string, quantity: number, unit: string, optional?: boolean];
 
 type Seed = {
   id: string;
@@ -24,17 +29,27 @@ type Seed = {
   kcal?: number;
 };
 
+const SMALL = new Set(["de", "da", "do", "das", "dos", "e", "com", "ao", "à", "na", "no", "em", "para", "ou"]);
+
+/** "Pasta cremosa de abóbora" → "Pasta Cremosa de Abóbora" (padrão editorial das telas). */
+function titleCase(t: string): string {
+  return t
+    .split(" ")
+    .map((w, i) => (i > 0 && SMALL.has(w) ? w : w.charAt(0).toUpperCase() + w.slice(1)))
+    .join(" ");
+}
+
 function build(s: Seed): Recipe {
   return {
     id: s.id,
     slug: s.id,
-    title: s.title,
+    title: titleCase(s.title),
     description: s.description,
-    imageUrl: "",
+    imageUrl: IMAGES[s.id] ?? "",
     prepTimeMinutes: s.time,
     servings: s.servings,
     cuisine: s.cuisine,
-    ingredients: s.ing.map(([item, quantity, unit]) => ({ item, quantity, unit })),
+    ingredients: s.ing.map(([item, quantity, unit, optional]) => ({ item, quantity, unit, ...(optional ? { optional } : {}) })),
     steps: s.steps.map((instruction, i) => ({ number: i + 1, instruction })),
     mealTypes: s.meals,
     dietaryTags: s.diet,
@@ -120,10 +135,10 @@ const seeds: Seed[] = [
 
   /* ───────── Almoço / jantar ───────── */
   {
-    id: "pasta-cremosa-abobora", title: "Pasta cremosa de abóbora e pimentão", description: "Quente, cremosa e reconfortante para uma noite fria.",
+    id: "pasta-cremosa-abobora", title: "Pasta cremosa de abóbora", description: "Quente, cremosa e reconfortante para uma noite fria.",
     time: 25, servings: 2, cuisine: "italiana", meals: ["lunch", "dinner"], diet: [V], tags: ["abóbora", "massa", "pimentão", "trigo", "gluten", "leite"], kcal: 340,
-    ing: [["Abóbora", 400, "g"], ["Pimentão vermelho", 1, "un"], ["Cebola média", 1, "un"], ["Alho", 2, "dentes"], ["Caldo de legumes", 500, "ml"], ["Penne ou fusilli", 200, "g"]],
-    steps: ["Corte a abóbora, o pimentão e a cebola em cubos médios.", "Refogue a cebola e o alho em azeite até perfumar, junte a abóbora e o pimentão.", "Cubra com o caldo e cozinhe 15 minutos, até a abóbora desmanchar. Bata com um mixer até virar um creme.", "Cozinhe a massa conforme a embalagem, escorra e misture ao creme. Acerte o sal e sirva."],
+    ing: [["Massa", 250, "g"], ["Abóbora", 300, "g"], ["Pimentão vermelho", 1, "un"], ["Alho", 1, "dente"], ["Creme de leite (ou alternativa vegetal)", 100, "ml"], ["Parmesão", 0, "a gosto"], ["Azeite de oliva", 0, "a gosto"], ["Sal e pimenta", 0, "a gosto"], ["Folhas de sálvia", 0, "a gosto", true]],
+    steps: ["Asse a abóbora e o pimentão até ficarem macios.", "Bata com o alho, o creme de leite, azeite, sal e pimenta até formar um molho cremoso.", "Cozinhe a massa conforme as instruções da embalagem.", "Misture a massa ao molho e finalize com parmesão e sálvia."],
     traits: [90, 40, 25, 30, 35], weather: [10, 50, 90, 90], pal: "warm",
   },
   {

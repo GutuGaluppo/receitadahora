@@ -1,15 +1,16 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronLeft, Close, Sliders } from "./icons";
 import { SavedRecipes } from "./SavedRecipes";
 import { TasteProfile } from "./TasteProfile";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 /**
- * Desktop: painel à direita (~42vw), Home continua visível atrás.
- * Mobile: tela cheia. A Home nunca desmonta, então o scroll/estado dela é preservado.
+ * Desktop: cartão flutuante à direita, a Home continua visível atrás.
+ * Mobile: tela cheia. A Home nunca desmonta, então scroll e estado dela são preservados.
  */
 export function LibraryDrawer({
   open,
@@ -20,6 +21,7 @@ export function LibraryDrawer({
   onClose: () => void;
   onOpenRecipe: (id: string) => void;
 }) {
+  const [view, setView] = useState<"library" | "taste">("library");
   const closeRef = useRef<HTMLButtonElement>(null);
   const openerRef = useRef<Element | null>(null);
 
@@ -35,8 +37,20 @@ export function LibraryDrawer({
     };
   }, [open]);
 
+  const close = (
+    <button
+      ref={closeRef}
+      type="button"
+      onClick={onClose}
+      aria-label="Fechar biblioteca"
+      className="themed flex h-11 w-11 items-center justify-center rounded-full text-strong hover:bg-strong/10"
+    >
+      <Close size={24} />
+    </button>
+  );
+
   return (
-    <AnimatePresence>
+    <AnimatePresence onExitComplete={() => setView("library")}>
       {open && (
         <>
           <motion.div
@@ -53,30 +67,50 @@ export function LibraryDrawer({
             key="drawer"
             role="dialog"
             aria-modal="true"
-            aria-label="Biblioteca"
-            className="themed fixed inset-y-0 right-0 z-50 flex w-full flex-col border-l border-strong/15 bg-paper shadow-[-12px_0_40px_-20px_rgba(0,0,0,0.25)] lg:w-[42vw] lg:min-w-[440px] lg:max-w-[640px]"
+            aria-label={view === "taste" ? "Meu gosto" : "Biblioteca"}
+            className="themed fixed inset-0 z-50 flex flex-col bg-card backdrop-blur-xl lg:inset-y-6 lg:left-auto lg:right-6 lg:w-[min(44vw,600px)] lg:rounded-[28px] lg:shadow-[0_30px_80px_-20px_rgba(70,35,10,0.45)]"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.5, ease: EASE }}
           >
-            <header className="flex items-center justify-between px-6 pb-2 pt-4 sm:px-10">
-              <h2 className="font-serif text-2xl">Biblioteca</h2>
-              <button
-                ref={closeRef}
-                type="button"
-                onClick={onClose}
-                aria-label="Fechar biblioteca"
-                className="themed flex h-11 w-11 items-center justify-center rounded-full text-muted hover:text-fg"
-              >
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
-                  <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                </svg>
-              </button>
-            </header>
-            <div className="flex-1 space-y-12 overflow-y-auto overscroll-contain px-6 pb-16 pt-6 sm:px-10">
-              <SavedRecipes onOpen={onOpenRecipe} />
-              <TasteProfile />
+            <div className="flex-1 overflow-y-auto overscroll-contain px-6 pb-12 pt-6 sm:px-9">
+              {view === "library" ? (
+                <>
+                  <header className="mb-6 flex items-center justify-between gap-3">
+                    <h2 className="display text-[40px]">Biblioteca</h2>
+                    <div className="flex items-center gap-1">
+                      <button
+                        type="button"
+                        onClick={() => setView("taste")}
+                        className="themed flex h-11 items-center gap-2 rounded-2xl bg-accent/12 px-4 text-[15px] font-medium text-strong hover:bg-accent/20"
+                      >
+                        <Sliders size={20} />
+                        Meu gosto
+                      </button>
+                      {close}
+                    </div>
+                  </header>
+                  <SavedRecipes onOpen={onOpenRecipe} />
+                </>
+              ) : (
+                <>
+                  <header className="mb-2 flex items-start justify-between gap-3">
+                    <div>
+                      <button
+                        type="button"
+                        onClick={() => setView("library")}
+                        className="themed -ml-2 mb-2 flex min-h-11 items-center gap-1 px-2 text-[15px] text-muted hover:text-fg"
+                      >
+                        <ChevronLeft size={18} /> Biblioteca
+                      </button>
+                      <h2 className="display text-[40px]">Meu gosto</h2>
+                    </div>
+                    {close}
+                  </header>
+                  <TasteProfile />
+                </>
+              )}
             </div>
           </motion.aside>
         </>

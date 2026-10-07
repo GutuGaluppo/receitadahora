@@ -5,12 +5,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { INTENT_WEIGHTS } from "@/config/recommendation-weights";
 import { RECIPES, RECIPES_BY_ID } from "@/data/recipes";
 import { paletteVars } from "@/lib/theme";
-import { useIsDesktop } from "@/lib/useIsDesktop";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 import { recommend } from "@/services/recommendation";
 import type { FeedbackReason, HomeState, Intent, IntentState, Recipe } from "@/types";
 import { AlternativePrompt } from "./AlternativePrompt";
 import { AtmosphereBackground } from "./AtmosphereBackground";
 import { FeedbackButtons } from "./FeedbackButtons";
+import { ArrowRight, ChevronLeft, Heart } from "./icons";
 import { LibraryButton } from "./LibraryButton";
 import { LibraryDrawer } from "./LibraryDrawer";
 import { useApp } from "./providers/AppProvider";
@@ -24,7 +25,7 @@ const SWITCH_MS = 650;
 export function Home() {
   const { getData, profile, logEvent, giveFeedback, isSaved, toggleSaved } = useApp();
   const { status, weather } = useWeather();
-  const desktop = useIsDesktop();
+  const desktop = useMediaQuery("(min-width: 1024px)");
 
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [homeState, setHomeState] = useState<HomeState>("suggestion");
@@ -170,11 +171,28 @@ export function Home() {
         ? "night"
         : null;
   const saved = isSaved(recipe.id);
+  const openAsk = () => setHomeState("alternativePrompt");
 
   const image = (cls: string) => (
     <motion.div layoutId="hero-image" transition={{ duration: 0.55, ease: EASE }} className={cls}>
-      <RecipeImage recipe={recipe} className="h-full w-full" />
+      <RecipeImage recipe={recipe} />
     </motion.div>
+  );
+
+  const btnPrimary =
+    "themed inline-flex h-14 w-full items-center justify-center gap-3 rounded-full bg-strong px-8 text-[17px] font-medium text-white shadow-[0_8px_20px_-8px_var(--strong)] transition-transform duration-300 hover:scale-[1.015] active:scale-[0.99]";
+  const btnOutline =
+    "themed inline-flex h-14 w-full items-center justify-center rounded-full border border-strong/35 px-8 text-[17px] font-medium text-strong transition-colors hover:bg-strong/5";
+
+  const suggestionActions = (
+    <div className="flex w-full flex-col gap-3">
+      <button type="button" onClick={openRecipe} className={btnPrimary}>
+        Ver receita <ArrowRight size={20} />
+      </button>
+      <button type="button" onClick={openAsk} className={btnOutline}>
+        Outra sugestão
+      </button>
+    </div>
   );
 
   const saveButton = (
@@ -182,139 +200,140 @@ export function Home() {
       type="button"
       aria-pressed={saved}
       onClick={() => toggleSaved(recipe.id)}
-      className={`themed min-h-12 rounded-full border-[1.5px] border-strong px-7 text-[15px] font-medium transition-colors duration-300 ${
-        saved ? "bg-strong text-paper" : "text-strong hover:bg-strong/10"
+      className={`themed inline-flex h-14 w-full items-center justify-center gap-3 rounded-full text-[17px] font-medium transition-colors duration-300 ${
+        saved ? "bg-accent/15 text-strong" : "bg-strong text-white shadow-[0_8px_20px_-8px_var(--strong)]"
       }`}
     >
-      {saved ? "✓ Salva" : "Salvar receita"}
+      <Heart size={20} filled={saved} />
+      {saved ? "Salva" : "Salvar receita"}
     </button>
   );
 
-  const otherLink = (
-    <button
-      type="button"
-      onClick={() => setHomeState("alternativePrompt")}
-      className="themed min-h-11 px-4 text-[15px] text-muted underline-offset-4 hover:text-fg hover:underline"
-    >
-      Outra sugestão
-    </button>
-  );
+  const feedback = <FeedbackButtons key={recipe.id} onLike={like} onDislike={dislike} onOther={openAsk} />;
 
-  const back = (
-    <button
-      type="button"
-      onClick={() => setHomeState("suggestion")}
-      className="themed -ml-3 min-h-11 px-3 text-sm text-muted hover:text-fg"
-    >
-      ← Voltar
-    </button>
-  );
-
-  const detailsFade = {
+  const fade = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
     transition: { duration: 0.5, delay: 0.3, ease: EASE },
   };
 
+  const back = (
+    <button
+      type="button"
+      onClick={() => setHomeState("suggestion")}
+      aria-label="Voltar para a sugestão"
+      className="themed flex h-11 w-11 items-center justify-center rounded-2xl bg-card text-strong shadow-sm"
+    >
+      <ChevronLeft size={22} />
+    </button>
+  );
+
   return (
-    <div className="themed relative min-h-dvh text-fg" style={paletteVars(recipe.palette)}>
+    <div className="themed relative min-h-dvh overflow-x-hidden text-fg" style={paletteVars(recipe.palette)}>
       <AtmosphereBackground palette={recipe.palette} mood={mood} />
 
-      <div className="fixed right-2 top-2 z-30 sm:right-5 sm:top-4">
-        <LibraryButton onClick={() => setLibraryOpen(true)} />
-      </div>
+      {!(open && !desktop) && (
+        <div className="fixed right-3 top-3 z-30 lg:right-8 lg:top-6">
+          <LibraryButton onClick={() => setLibraryOpen(true)} />
+        </div>
+      )}
 
-      <main className="mx-auto w-full max-w-[1200px] px-6 sm:px-10" aria-live="polite">
+      <main className="mx-auto w-full max-w-[1560px]" aria-live="polite">
         <AnimatePresence mode="wait">
           <motion.div
             key={recipe.id}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0.0 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: EASE }}
           >
             <LayoutGroup>
-              {!open ? (
-                /* ───────── Sugestão (fechada) ───────── */
-                <section className="flex min-h-dvh flex-col items-center justify-center gap-5 py-16 text-center">
-                  {image("aspect-square w-[min(70vw,36dvh,400px)]")}
-                  <h1 className="max-w-xl text-balance font-serif text-3xl leading-tight sm:text-4xl">
-                    {recipe.title}
-                  </h1>
-                  <AnimatePresence mode="wait" initial={false}>
-                    {asking ? (
-                      <AlternativePrompt
-                        key="prompt"
-                        onChoose={chooseIntent}
-                        onCancel={() => setHomeState("suggestion")}
-                      />
-                    ) : (
-                      <motion.div
-                        key="actions"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="flex flex-col items-center gap-5"
-                      >
-                        <p className="max-w-md text-balance text-lg text-muted">{recipe.description}</p>
-                        <div className="flex flex-col items-center gap-1">
-                          <button
-                            type="button"
-                            onClick={openRecipe}
-                            className="themed h-14 min-w-[200px] rounded-full bg-strong px-9 text-base font-medium text-paper transition-transform duration-300 hover:scale-[1.02]"
-                          >
-                            Ver receita
-                          </button>
-                          {otherLink}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+              {!open && desktop && (
+                /* ───────── Desktop · sugestão ───────── */
+                <section className="grid min-h-dvh grid-cols-[1.5fr_1fr] items-center gap-4 pr-[6vw]">
+                  {image("-ml-[3vw] w-[calc(100%+3vw)] max-w-[980px] self-center")}
+                  <div className="flex max-w-[440px] flex-col gap-6">
+                    <h1 className="display text-[clamp(44px,4.6vw,68px)]">{recipe.title}</h1>
+                    <p className="max-w-[26ch] text-[19px] leading-snug text-muted">{recipe.description}</p>
+                    <div className="mt-2">{suggestionActions}</div>
+                  </div>
                 </section>
-              ) : desktop ? (
-                /* ───────── Receita aberta — desktop 40/60 ───────── */
-                <article className="grid min-h-dvh grid-cols-[2fr_3fr] gap-16 py-24">
-                  <div className="flex flex-col items-start gap-5 self-start lg:sticky lg:top-24">
-                    {back}
-                    {image("aspect-square w-[min(100%,300px)]")}
-                    <h1 className="text-balance font-serif text-3xl leading-tight">{recipe.title}</h1>
-                    <motion.div {...detailsFade} className="flex flex-col items-start gap-5">
-                      <RecipeMeta recipe={recipe} />
-                      <FeedbackButtons key={recipe.id} onLike={like} onDislike={dislike} />
-                      <div className="flex items-center gap-2">
-                        {saveButton}
-                        {otherLink}
-                      </div>
+              )}
+
+              {!open && !desktop && (
+                /* ───────── Mobile · sugestão ───────── */
+                <section className="flex min-h-dvh flex-col px-6 pb-8 pt-14">
+                  {image("-mx-[10%] w-[120%] max-w-none")}
+                  <div className="mt-auto flex flex-col gap-3">
+                    <h1 className="display text-[clamp(38px,11vw,52px)]">{recipe.title}</h1>
+                    <p className="max-w-[28ch] text-[18px] leading-snug text-muted">{recipe.description}</p>
+                    <div className="mt-3">{suggestionActions}</div>
+                  </div>
+                </section>
+              )}
+
+              {open && desktop && (
+                /* ───────── Desktop · receita aberta ───────── */
+                <article className="grid min-h-dvh grid-cols-[1.05fr_1fr] gap-6 py-8 pl-0 pr-[4vw]">
+                  <div className="flex flex-col justify-center">
+                    {image("-ml-[2vw] w-[calc(100%+2vw)] max-w-[720px] [&_img]:lg:max-h-[56dvh]")}
+                    <motion.div {...fade} className="relative z-10 -mt-10 pl-[4vw]">
+                      <div className="mb-3">{back}</div>
+                      <h1 className="display text-[clamp(40px,4vw,60px)]">{recipe.title}</h1>
+                      <RecipeMeta recipe={recipe} className="mt-3" />
                     </motion.div>
                   </div>
-                  <motion.div {...detailsFade} className="max-w-2xl space-y-14 pt-14">
-                    <Ingredients recipe={recipe} />
-                    <Steps recipe={recipe} />
-                  </motion.div>
-                </article>
-              ) : (
-                /* ───────── Receita aberta — mobile / tablet (scroll natural) ───────── */
-                <article className="flex flex-col items-start gap-6 py-16">
-                  {back}
-                  {image("aspect-square w-[min(64vw,300px)] self-center")}
-                  <h1 className="text-balance font-serif text-3xl leading-tight">{recipe.title}</h1>
-                  <motion.div {...detailsFade} className="flex w-full flex-col items-start gap-8">
-                    <RecipeMeta recipe={recipe} />
-                    <FeedbackButtons key={recipe.id} onLike={like} onDislike={dislike} />
-                    <Ingredients recipe={recipe} />
-                    <Steps recipe={recipe} />
-                    <div className="flex w-full flex-col items-start gap-1 pb-10">
-                      {saveButton}
-                      {otherLink}
+                  <motion.div {...fade} className="flex items-center">
+                    <div className="w-full rounded-[28px] bg-card px-10 py-7 shadow-[0_30px_60px_-30px_rgba(80,40,10,0.35)] backdrop-blur-sm">
+                      <Ingredients recipe={recipe} />
+                      <hr className="my-5 border-fg/10" />
+                      <Steps recipe={recipe} />
+                      <div className="mt-6">{saveButton}</div>
+                      <div className="mt-2">{feedback}</div>
                     </div>
                   </motion.div>
+                </article>
+              )}
+
+              {open && !desktop && (
+                /* ───────── Mobile · receita aberta ───────── */
+                <article className="pb-10">
+                  <div className="relative px-4 pt-3">
+                    <div className="absolute inset-x-4 top-3 z-10 flex justify-between">
+                      {back}
+                      <LibraryButton boxed onClick={() => setLibraryOpen(true)} />
+                    </div>
+                    {image("mx-auto mt-6 w-[104%] -translate-x-[2%]")}
+                  </div>
+                  <motion.div {...fade} className="px-6">
+                    <h1 className="display -mt-6 text-[clamp(36px,10vw,48px)]">{recipe.title}</h1>
+                    <RecipeMeta recipe={recipe} className="mt-2" />
+                    <hr className="my-6 border-fg/10" />
+                    <Ingredients recipe={recipe} />
+                    <hr className="my-6 border-fg/10" />
+                    <Steps recipe={recipe} />
+                    <div className="mt-6">{feedback}</div>
+                  </motion.div>
+                  <div className="sticky bottom-0 z-20 mt-6 bg-gradient-to-t from-paper via-paper/90 to-transparent px-6 pb-5 pt-6">
+                    {saveButton}
+                  </div>
                 </article>
               )}
             </LayoutGroup>
           </motion.div>
         </AnimatePresence>
       </main>
+
+      <AnimatePresence>
+        {asking && (
+          <AlternativePrompt
+            key="ask"
+            isDesktop={desktop}
+            onChoose={chooseIntent}
+            onCancel={() => setHomeState("suggestion")}
+          />
+        )}
+      </AnimatePresence>
 
       <LibraryDrawer open={libraryOpen} onClose={() => setLibraryOpen(false)} onOpenRecipe={openSaved} />
     </div>

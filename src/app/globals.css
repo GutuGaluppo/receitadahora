@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
-/* Cores dinâmicas por receita: o wrapper do app define estas variáveis. */
+/* Paleta dinâmica por receita: o wrapper do app define estas variáveis. */
 :root {
-  --bg: #f4e8d6;
-  --bg2: #ebd2b0;
-  --accent: #c8663d;
-  --strong: #9e4325;
-  --fg: #3b2417;
-  --muted: #6e5342;
+  --bg: #f8dfc2;
+  --bg2: #efc49a;
+  --accent: #c0502f;
+  --strong: #b5412a;
+  --fg: #1b1411;
+  --muted: #5f5249;
+  --card: rgba(252, 244, 234, 0.92);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -18,8 +19,9 @@
   --color-strong: var(--strong);
   --color-fg: var(--fg);
   --color-muted: var(--muted);
+  --color-card: var(--card);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
 }
 
 html {
@@ -33,9 +35,15 @@ body {
   font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  transition:
-    color 600ms var(--ease),
-    background-color 600ms var(--ease);
+}
+
+/* Títulos editoriais: serifa de alto contraste, apertada. */
+.display {
+  font-family: var(--font-newsreader), ui-serif, Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+  font-optical-sizing: auto;
 }
 
 button {
@@ -46,7 +54,7 @@ button {
 :focus-visible {
   outline: 2px solid var(--strong);
   outline-offset: 3px;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 .themed {
@@ -57,13 +65,18 @@ button {
 }
 
 .lib-icon {
-  transition: filter 200ms ease;
+  transition: filter 200ms ease, background-color 200ms ease;
 }
 .lib-icon:hover {
   filter: brightness(1.12);
 }
 
-/* Redução de movimento: sem slides/translates; fades curtos continuam. */
+/* A foto recortada se dissolve no fundo (bordas suaves, sem bloco retangular). */
+.feather {
+  -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 58%, transparent 100%);
+  mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 58%, transparent 100%);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -3,24 +3,37 @@
 import { useState } from "react";
 import type { Recipe } from "@/types";
 
-export function RecipeMeta({ recipe }: { recipe: Recipe }) {
-  const parts = [`${recipe.prepTimeMinutes} min`, `Serve ${recipe.servings}`];
-  if (recipe.nutrition?.calories) parts.push(`${recipe.nutrition.calories} kcal`);
-  return <p className="text-sm tracking-wide text-muted">{parts.join(" · ")}</p>;
+export function RecipeMeta({ recipe, className = "" }: { recipe: Recipe; className?: string }) {
+  return (
+    <p className={`text-[17px] text-muted ${className}`}>
+      {recipe.prepTimeMinutes} min <span aria-hidden>&nbsp;·&nbsp;</span>
+      Serve {recipe.servings}
+    </p>
+  );
 }
 
-function formatQty(q: number): string {
-  if (Number.isInteger(q)) return String(q);
-  if (q === 0.5) return "½";
-  if (q === 0.75) return "¾";
-  if (q === 0.25) return "¼";
-  return String(q).replace(".", ",");
+function qty(q: number): string {
+  const whole = Math.trunc(q);
+  const frac = q - whole;
+  const f = frac === 0.5 ? "½" : frac === 0.25 ? "¼" : frac === 0.75 ? "¾" : "";
+  if (f) return whole ? `${whole}${f}` : f;
+  return Number.isInteger(q) ? String(q) : String(q).replace(".", ",");
+}
+
+/** "250 g de massa", "1 dente de alho", "Parmesão a gosto", "Folhas de sálvia (opcional)". */
+function ingredientLine(i: Recipe["ingredients"][number]): string {
+  const lower = `${i.item.charAt(0).toLowerCase()}${i.item.slice(1)}`;
+  let line: string;
+  if (i.unit === "a gosto") line = `${i.item} a gosto`;
+  else if (i.unit === "un" || i.unit === "") line = `${qty(i.quantity)} ${lower}`;
+  else line = `${qty(i.quantity)} ${i.unit} de ${lower}`;
+  return i.optional ? `${line} (opcional)` : line;
 }
 
 export function Ingredients({ recipe }: { recipe: Recipe }) {
-  const [checked, setChecked] = useState<Set<string>>(new Set());
+  const [done, setDone] = useState<Set<string>>(new Set());
   const toggle = (item: string) =>
-    setChecked((prev) => {
+    setDone((prev) => {
       const next = new Set(prev);
       if (next.has(item)) next.delete(item);
       else next.add(item);
@@ -29,28 +42,19 @@ export function Ingredients({ recipe }: { recipe: Recipe }) {
 
   return (
     <section aria-labelledby="ingredientes">
-      <h2 id="ingredientes" className="mb-4 text-xs font-medium uppercase tracking-[0.18em] text-muted">
+      <h2 id="ingredientes" className="display text-[28px]">
         Ingredientes
       </h2>
-      <ul className="space-y-1">
+      <ul className="mt-3 space-y-0">
         {recipe.ingredients.map((ing) => {
-          const done = checked.has(ing.item);
+          const checked = done.has(ing.item);
           return (
             <li key={ing.item}>
-              <label className="flex min-h-11 cursor-pointer items-center gap-3 py-1">
-                <input
-                  type="checkbox"
-                  checked={done}
-                  onChange={() => toggle(ing.item)}
-                  className="h-5 w-5 shrink-0 cursor-pointer appearance-none rounded-[5px] border-[1.5px] border-strong bg-transparent checked:bg-strong focus-visible:outline-2 focus-visible:outline-offset-2"
-                />
-                <span className={`themed ${done ? "text-muted line-through decoration-1" : ""}`}>
-                  {ing.item}
-                  <span className="text-muted">
-                    {" "}
-                    ({formatQty(ing.quantity)} {ing.unit})
-                  </span>
-                </span>
+              {/* marcar enquanto prepara: toque risca o item */}
+              <label className="flex min-h-8 cursor-pointer items-center gap-4 py-0.5 text-[17px]">
+                <input type="checkbox" className="peer sr-only" checked={checked} onChange={() => toggle(ing.item)} />
+                <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent/70 peer-checked:bg-accent peer-focus-visible:ring-2 peer-focus-visible:ring-strong peer-focus-visible:ring-offset-2" />
+                <span className={checked ? "text-muted line-through decoration-1" : ""}>{ingredientLine(ing)}</span>
               </label>
             </li>
           );
@@ -63,14 +67,16 @@ export function Ingredients({ recipe }: { recipe: Recipe }) {
 export function Steps({ recipe }: { recipe: Recipe }) {
   return (
     <section aria-labelledby="preparo">
-      <h2 id="preparo" className="mb-5 text-xs font-medium uppercase tracking-[0.18em] text-muted">
+      <h2 id="preparo" className="display text-[28px]">
         Modo de preparo
       </h2>
-      <ol className="space-y-6">
+      <ol className="mt-4 space-y-3">
         {recipe.steps.map((s) => (
-          <li key={s.number} className="flex gap-5">
-            <span className="font-serif text-lg tabular-nums text-accent">{String(s.number).padStart(2, "0")}</span>
-            <p className="max-w-[56ch] leading-relaxed">{s.instruction}</p>
+          <li key={s.number} className="flex items-start gap-4">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent/15 text-[15px] font-medium">
+              {s.number}
+            </span>
+            <p className="max-w-[58ch] pt-[5px] text-[17px] leading-relaxed">{s.instruction}</p>
           </li>
         ))}
       </ol>

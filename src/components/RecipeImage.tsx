@@ -3,79 +3,119 @@ import { hash, mix, seeded } from "@/lib/color";
 import type { Recipe } from "@/types";
 
 /**
- * Prato recortado, isolado e com sombra suave. Quando a receita tem `imageUrl`
- * (foto recortada em PNG/WebP), usa a foto; senão desenha um prato a partir da paleta.
+ * Prato como objeto editorial: tigela isolada, sombra suave, folhas e migalhas flutuando.
+ * Com `imageUrl` usa a foto (borda dissolvida no fundo); sem ela, desenha a tigela
+ * a partir do acento da paleta. Ocupa 100% da largura do contêiner.
  */
-export function RecipeImage({ recipe, className }: { recipe: Recipe; className?: string }) {
+export function RecipeImage({ recipe, className = "" }: { recipe: Recipe; className?: string }) {
   if (recipe.imageUrl) {
     return (
       <img
         src={recipe.imageUrl}
         alt={recipe.title}
-        className={className}
-        style={{ filter: "drop-shadow(0 18px 22px rgba(0,0,0,0.22))" }}
+        width={980}
+        height={890}
+        decoding="async"
+        className={`feather mx-auto block h-auto max-h-[52dvh] w-auto max-w-full lg:max-h-[78dvh] select-none ${className}`}
+        draggable={false}
       />
     );
   }
 
   const rnd = seeded(hash(recipe.slug));
   const { accent } = recipe.palette;
-  const tones = [mix(accent, "#000000", 0.18), accent, mix(accent, "#ffffff", 0.28), mix(accent, "#000000", 0.35)];
-  const herbs = ["#6F9A45", "#8DB05B", "#4F7A35"];
+  const food = [mix(accent, "#000000", 0.2), accent, mix(accent, "#ffffff", 0.3), mix(accent, "#000000", 0.38), mix(accent, "#f5c26b", 0.35)];
+  const leafTones = ["#4F6F36", "#3F5E2E", "#617F3F"];
 
-  const blobs = Array.from({ length: 6 }, () => {
+  // monte de comida: muitos pedaços irregulares, mais altos no centro
+  const pieces = Array.from({ length: 46 }, () => {
+    const t = rnd();
     const ang = rnd() * Math.PI * 2;
-    const dist = rnd() * 62;
+    const dist = Math.sqrt(t) * 118;
+    const cx = 200 + Math.cos(ang) * dist;
+    const mound = 1 - Math.min(1, dist / 130);
     return {
-      cx: 200 + Math.cos(ang) * dist,
-      cy: 190 + Math.sin(ang) * dist,
-      r: 30 + rnd() * 26,
-      fill: tones[Math.floor(rnd() * tones.length)],
+      cx,
+      cy: 178 + Math.sin(ang) * dist * 0.34 - mound * 34,
+      rx: 9 + rnd() * 17,
+      ry: 6 + rnd() * 11,
+      rot: rnd() * 180 - 90,
+      fill: food[Math.floor(rnd() * food.length)],
     };
-  });
-  const garnish = Array.from({ length: 12 }, () => {
-    const ang = rnd() * Math.PI * 2;
-    const dist = rnd() * 78;
-    return {
-      cx: 200 + Math.cos(ang) * dist,
-      cy: 190 + Math.sin(ang) * dist,
-      r: 2.5 + rnd() * 4,
-      fill: herbs[Math.floor(rnd() * herbs.length)],
-    };
-  });
+  }).sort((a, b) => a.cy - b.cy);
 
+  const leaves = Array.from({ length: 7 }, () => ({
+    x: rnd() * 380 + 10,
+    y: rnd() * 300 + 10,
+    rot: rnd() * 360,
+    s: 0.55 + rnd() * 0.6,
+    fill: leafTones[Math.floor(rnd() * leafTones.length)],
+  })).filter((l) => !(l.x > 70 && l.x < 330 && l.y > 90 && l.y < 250));
+
+  const crumbs = Array.from({ length: 16 }, () => ({
+    x: rnd() * 390 + 5,
+    y: rnd() * 330 + 20,
+    r: 1.4 + rnd() * 2.6,
+    fill: food[Math.floor(rnd() * food.length)],
+  }));
+
+  const id = recipe.slug;
   return (
     <svg
-      viewBox="0 0 400 400"
+      viewBox="0 0 400 360"
       role="img"
       aria-label={recipe.title}
-      className={className}
+      className={`mx-auto block h-auto max-h-[46dvh] w-full ${className}`}
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
-        <filter id={`soft-${recipe.slug}`} x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur stdDeviation="14" />
+        <filter id={`blur-${id}`} x="-30%" y="-60%" width="160%" height="220%">
+          <feGaussianBlur stdDeviation="9" />
         </filter>
-        <radialGradient id={`plate-${recipe.slug}`} cx="40%" cy="35%" r="75%">
-          <stop offset="0%" stopColor="#FFFDF8" />
-          <stop offset="100%" stopColor="#EDE4D5" />
+        <linearGradient id={`bowl-${id}`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#FFFEFB" />
+          <stop offset="100%" stopColor="#E9DFCF" />
+        </linearGradient>
+        <clipPath id={`clip-${id}`}>
+          <path d="M60 188C60 120 120 60 200 60s140 60 140 128c0 22-60 42-140 42S60 210 60 188z" />
+        </clipPath>
+        <radialGradient id={`inner-${id}`} cx="50%" cy="40%" r="70%">
+          <stop offset="0%" stopColor="#F4EBDD" />
+          <stop offset="100%" stopColor="#D9CCB8" />
         </radialGradient>
       </defs>
-      <ellipse cx="200" cy="350" rx="150" ry="22" fill="#000" opacity="0.22" filter={`url(#soft-${recipe.slug})`} />
-      <circle cx="200" cy="190" r="168" fill={`url(#plate-${recipe.slug})`} />
-      <circle cx="200" cy="190" r="142" fill="none" stroke="#E2D7C4" strokeWidth="2" />
-      <circle cx="200" cy="190" r="118" fill="#F7F1E6" />
-      <g>
-        {blobs.map((b, i) => (
-          <circle key={i} cx={b.cx} cy={b.cy} r={b.r} fill={b.fill} opacity="0.95" />
-        ))}
-        {blobs.slice(0, 3).map((b, i) => (
-          <ellipse key={`h${i}`} cx={b.cx - b.r * 0.3} cy={b.cy - b.r * 0.35} rx={b.r * 0.35} ry={b.r * 0.2} fill="#fff" opacity="0.22" />
-        ))}
-        {garnish.map((g, i) => (
-          <circle key={`g${i}`} cx={g.cx} cy={g.cy} r={g.r} fill={g.fill} />
+
+      {crumbs.map((c, i) => (
+        <circle key={`c${i}`} cx={c.x} cy={c.y} r={c.r} fill={c.fill} opacity="0.75" />
+      ))}
+
+      <ellipse cx="200" cy="318" rx="140" ry="16" fill="#3A2412" opacity="0.28" filter={`url(#blur-${id})`} />
+
+      {/* corpo da tigela */}
+      <path d="M52 188c4 70 62 124 148 124s144-54 148-124H52z" fill={`url(#bowl-${id})`} />
+      <path d="M52 188c10 18 28 36 52 50" stroke="#fff" strokeOpacity="0.5" strokeWidth="3" fill="none" strokeLinecap="round" />
+      {/* boca da tigela */}
+      <ellipse cx="200" cy="188" rx="148" ry="46" fill="#FBF6EC" />
+      <ellipse cx="200" cy="188" rx="136" ry="40" fill={`url(#inner-${id})`} />
+
+      {/* comida */}
+      <g clipPath={`url(#clip-${id})`}>
+        {pieces.map((p, i) => (
+          <g key={i} transform={`translate(${p.cx} ${p.cy}) rotate(${p.rot})`}>
+            <ellipse rx={p.rx} ry={p.ry} fill={p.fill} />
+            <ellipse cx={-p.rx * 0.25} cy={-p.ry * 0.3} rx={p.rx * 0.5} ry={p.ry * 0.28} fill="#fff" opacity="0.2" />
+            <ellipse rx={p.rx} ry={p.ry} fill="none" stroke="#000" strokeOpacity="0.1" />
+          </g>
         ))}
       </g>
+
+      {/* folhas flutuando */}
+      {leaves.map((l, i) => (
+        <g key={`l${i}`} transform={`translate(${l.x} ${l.y}) rotate(${l.rot}) scale(${l.s})`}>
+          <path d="M0 -22C14 -12 14 12 0 22C-14 12 -14 -12 0 -22Z" fill={l.fill} />
+          <path d="M0 -20V20" stroke="#E7F0D8" strokeOpacity="0.45" strokeWidth="1.2" />
+        </g>
+      ))}
     </svg>
   );
 }

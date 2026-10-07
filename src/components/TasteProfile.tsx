@@ -6,6 +6,7 @@ import { splitTerms } from "@/lib/text";
 import { searchCities, type CityResult } from "@/services/weather";
 import type { DietaryPreference, Goal, MealType } from "@/types";
 import { Chip } from "./Chip";
+import { Calendar, ChevronRight, Clock, Leaf, People, Pin, Target } from "./icons";
 import { useApp } from "./providers/AppProvider";
 
 function toggle<T>(list: T[], v: T): T[] {
@@ -16,6 +17,7 @@ function Row({
   id,
   title,
   summary,
+  Icon,
   openId,
   setOpenId,
   children,
@@ -23,25 +25,30 @@ function Row({
   id: string;
   title: string;
   summary: string;
+  Icon: typeof Leaf;
   openId: string | null;
   setOpenId: (id: string | null) => void;
   children: React.ReactNode;
 }) {
   const open = openId === id;
   return (
-    <div className="border-b border-strong/15">
+    <div className="rounded-2xl border border-fg/10 bg-white/30">
       <button
         type="button"
         aria-expanded={open}
         aria-controls={`panel-${id}`}
         onClick={() => setOpenId(open ? null : id)}
-        className="themed flex min-h-14 w-full items-center justify-between gap-4 py-3 text-left"
+        className="themed flex min-h-[76px] w-full items-center gap-5 px-5 py-3 text-left"
       >
-        <span className="font-medium">{title}</span>
-        <span className="truncate text-sm text-muted">{summary}</span>
+        <Icon size={30} className="shrink-0 text-strong" />
+        <span className="flex min-w-0 flex-1 flex-col">
+          <span className="display text-[21px] leading-tight">{title}</span>
+          <span className="truncate text-[15px] text-muted">{summary}</span>
+        </span>
+        <ChevronRight size={20} className={`shrink-0 text-strong transition-transform duration-300 ${open ? "rotate-90" : ""}`} />
       </button>
       {open && (
-        <div id={`panel-${id}`} className="pb-5">
+        <div id={`panel-${id}`} className="px-5 pb-5">
           {children}
         </div>
       )}
@@ -90,13 +97,15 @@ export function TasteProfile() {
 
   return (
     <section aria-labelledby="meu-gosto">
-      <h3 id="meu-gosto" className="mb-2 font-serif text-xl">
+      <h3 id="meu-gosto" className="sr-only">
         Meu Gosto
       </h3>
-      <p className="mb-3 text-sm text-muted">Ajuste quando quiser. Salva sozinho.</p>
+      <p className="mb-6 max-w-[36ch] text-[16px] text-muted">
+        Ajuste suas preferências para que as sugestões combinem ainda mais com a sua rotina. Salva sozinho.
+      </p>
 
-      <div className="border-t border-strong/15">
-        <Row id="diet" title="Alimentação" summary={dietSummary} openId={openId} setOpenId={setOpenId}>
+      <div className="space-y-3">
+        <Row id="diet" title="Alimentação" Icon={Leaf} summary={dietSummary} openId={openId} setOpenId={setOpenId}>
           <div className="flex flex-wrap gap-2" role="group" aria-label="Alimentação">
             <Chip
               selected={profile.dietaryPreferences.length === 0}
@@ -134,6 +143,7 @@ export function TasteProfile() {
         <Row
           id="goals"
           title="Objetivos"
+          Icon={Target}
           summary={
             profile.goals.length
               ? GOAL_OPTIONS.filter((g) => profile.goals.includes(g.id)).map((g) => g.label.toLowerCase()).join(", ")
@@ -160,7 +170,7 @@ export function TasteProfile() {
           </div>
         </Row>
 
-        <Row id="time" title="Tempo disponível" summary={timeLabel} openId={openId} setOpenId={setOpenId}>
+        <Row id="time" title="Tempo habitual" Icon={Clock} summary={timeLabel} openId={openId} setOpenId={setOpenId}>
           <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Tempo disponível">
             {TIME_OPTIONS.map((t) => (
               <button
@@ -171,7 +181,7 @@ export function TasteProfile() {
                 onClick={() => updateProfile({ usualPrepTime: t.value })}
                 className={`themed min-h-11 rounded-full border-[1.5px] px-4 text-[15px] transition-colors duration-300 ${
                   profile.usualPrepTime === t.value
-                    ? "border-strong bg-strong text-paper"
+                    ? "border-strong bg-strong text-white"
                     : "border-strong/35 hover:border-strong"
                 }`}
               >
@@ -184,7 +194,34 @@ export function TasteProfile() {
         <Row
           id="routine"
           title="Rotina"
-          summary={`${profile.householdSize} ${profile.householdSize === 1 ? "pessoa" : "pessoas"}`}
+          Icon={Calendar}
+          summary={
+            profile.usualMealTimes.length
+              ? MEAL_OPTIONS.filter((m) => profile.usualMealTimes.includes(m.id)).map((m) => m.label.toLowerCase()).join(", ")
+              : "nenhuma refeição"
+          }
+          openId={openId}
+          setOpenId={setOpenId}
+        >
+          <p className="mb-2 text-sm text-muted">Costuma preparar</p>
+          <div className="flex flex-wrap gap-2" role="group" aria-label="Refeições que costuma preparar">
+            {MEAL_OPTIONS.map((m) => (
+              <Chip
+                key={m.id}
+                selected={profile.usualMealTimes.includes(m.id)}
+                onClick={() => updateProfile({ usualMealTimes: toggle<MealType>(profile.usualMealTimes, m.id) })}
+              >
+                {m.label}
+              </Chip>
+            ))}
+          </div>
+        </Row>
+
+        <Row
+          id="people"
+          title="Pessoas"
+          Icon={People}
+          summary={`${profile.householdSize >= 5 ? "5+" : profile.householdSize} ${profile.householdSize === 1 ? "pessoa" : "pessoas"} em casa`}
           openId={openId}
           setOpenId={setOpenId}
         >
@@ -212,24 +249,13 @@ export function TasteProfile() {
               +
             </button>
           </div>
-          <p className="mb-2 mt-4 text-sm text-muted">Costuma preparar</p>
-          <div className="flex flex-wrap gap-2" role="group" aria-label="Refeições que costuma preparar">
-            {MEAL_OPTIONS.map((m) => (
-              <Chip
-                key={m.id}
-                selected={profile.usualMealTimes.includes(m.id)}
-                onClick={() => updateProfile({ usualMealTimes: toggle<MealType>(profile.usualMealTimes, m.id) })}
-              >
-                {m.label}
-              </Chip>
-            ))}
-          </div>
         </Row>
 
         <Row
           id="climate"
           title="Clima e região"
-          summary={profile.city ? `${profile.city}${profile.weatherEnabled ? "" : " · clima desligado"}` : "—"}
+          Icon={Pin}
+          summary={profile.city ? `${profile.city}${profile.weatherEnabled ? "" : " · clima desligado"}` : "Usamos sua cidade para sugestões sazonais"}
           openId={openId}
           setOpenId={setOpenId}
         >
@@ -279,7 +305,7 @@ export function TasteProfile() {
         </Row>
       </div>
 
-      <div className="mt-8 flex flex-wrap gap-x-6 text-sm text-muted">
+      <div className="mt-8 flex flex-wrap gap-x-6 text-[15px] text-muted">
         <button type="button" onClick={download} className="themed min-h-11 underline-offset-4 hover:text-fg hover:underline">
           Exportar meus dados
         </button>

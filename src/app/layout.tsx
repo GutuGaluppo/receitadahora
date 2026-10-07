@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Inter, Newsreader } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
-const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"], axes: ["opsz"] });
+const serif = Newsreader({ variable: "--font-newsreader", subsets: ["latin"], style: ["normal"], axes: ["opsz"] });
 
 export const metadata: Metadata = {
   title: "Receita da Hora",
@@ -11,14 +11,14 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f4e8d6",
+  themeColor: "#f8dfc2",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${fraunces.variable} h-full`}>
+    <html lang="pt-BR" className={`${inter.variable} ${serif.variable} h-full`}>
       <body className="min-h-full">{children}</body>
     </html>
   );

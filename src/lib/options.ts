@@ -16,11 +16,10 @@ export const GOAL_OPTIONS: { id: Goal; label: string }[] = [
 ];
 
 export const TIME_OPTIONS: { value: number; label: string }[] = [
-  { value: 10, label: "Até 10 min" },
-  { value: 20, label: "10–20 min" },
-  { value: 30, label: "20–30 min" },
-  { value: 45, label: "30–45 min" },
-  { value: 60, label: "45+ min" },
+  { value: 10, label: "10 minutos" },
+  { value: 20, label: "20 minutos" },
+  { value: 30, label: "30 minutos" },
+  { value: 45, label: "45+ minutos" },
 ];
 
 export const MEAL_OPTIONS = [
