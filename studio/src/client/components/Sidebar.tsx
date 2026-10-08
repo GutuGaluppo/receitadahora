@@ -6,6 +6,7 @@ const LINKS = [
   { to: "/ingredientes", label: "Ingredientes" },
   { to: "/lotes", label: "Lotes" },
   { to: "/revisao", label: "Revisão" },
+  { to: "/factory", label: "Factory" },
 ];
 
 export function Sidebar({ environment, user, reviewCount }: { environment?: string; user?: string; reviewCount?: number }) {

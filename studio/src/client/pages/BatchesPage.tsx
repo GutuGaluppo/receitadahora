@@ -15,7 +15,7 @@ export function BatchesPage() {
   }
 
   const columns: Column<Batch>[] = [
-    { key: "n", header: "Lote", render: (b) => <span className="font-medium">Lote #{String(b.number).padStart(3, "0")}</span> },
+    { key: "n", header: "Lote", render: (b) => <span className="flex items-center gap-2 font-medium">Lote #{String(b.number).padStart(3, "0")}{b.source === "factory" && <Badge tone="neutral" icon="⚙">Factory</Badge>}</span> },
     { key: "d", header: "Criado", className: "tabular text-zinc-500", render: (b) => fmtDay(b.created_at) },
     { key: "r", header: "Receitas", className: "tabular", render: (b) => b.progress.recipes_total },
     { key: "a", header: "Aprovadas", className: "tabular", render: (b) => `${b.progress.approved}/${b.progress.recipes_total}` },

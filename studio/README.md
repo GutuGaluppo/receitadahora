@@ -81,6 +81,28 @@ GET /api/public/categories
 GET /api/public/assets/*          (só arquivos aprovados de receitas publicadas)
 ```
 
+## Content Factory
+
+Linha de produção editorial assistida dentro do Studio (spec: `implementations/IMPLEMENTATION_FABRICA_DE_CONTEUDO.md`). **Nada é publicado sem revisão humana** e a Factory não cria base paralela: tudo entra em `recipes`, `ingredients`, `assets` e `batches`.
+
+```
+Brief → job → provider → parse JSON → schema → normalização → duplicidade (título, depois ingredientes/categoria/técnica)
+      → resolução de ingredientes (reutilizar antes de criar) → assets ausentes → rascunhos num lote "Factory" → Review → Approve → Publish
+```
+
+- **Telas** (`/factory`): Generate, Queue, History, Templates e Settings; detalhe do job com resumo, decisões (duplicidades, ingredientes ambíguos, inválidas) e revisão rápida das receitas (Approve / Edit / Reject / Regenerate). Bloco "Factory" no Dashboard.
+- **Jobs** (`generation_jobs`, `generation_events`, `generation_items`): cada geração é auditável, com template + versão, provider, modelo, custo estimado/real, saída bruta preservada e linha do tempo de eventos. Falhas externas e estruturais podem ser repetidas **manualmente** (máx. 3 tentativas, sem retry automático). Idempotência por `Idempotency-Key` / `idempotency_key`.
+- **Templates** (`generation_templates`): versionados no D1 (recipe, recipe_image = Recipe Photography System v0.1, ingredient_image, description, metadata). O prompt de imagem é sempre montado a partir do template + dados da receita.
+- **Providers**: `RecipeGenerationProvider` (hoje só `MockRecipeGenerationProvider`, determinístico, com diretivas de teste nas observações: `[mock:fail-external]`, `[mock:malformed]`, `[mock:invalid]`) e `ImageGenerationProvider` (`DisabledImageGenerationProvider` por padrão; `MockImageGenerationProvider` para dev; `OpenAIImageProvider` pronto, mas só é instanciado com a flag ligada e passa pelos guardrails). Chaves ficam em secrets do Worker.
+- **Flags** (estado inicial: texto ligado, imagem e automação desligadas): `CONTENT_GENERATION_ENABLED=true`, `IMAGE_GENERATION_ENABLED=false`, `AUTO_BATCH_GENERATION_ENABLED=false`. O backend bloqueia mesmo que o frontend seja manipulado. Com imagens desligadas, assets ausentes viram jobs `disabled` (nenhuma chamada externa) e as imagens são enviadas manualmente como antes.
+- **Guardrails**: `DAILY_GENERATION_LIMIT` (jobs pagos/dia) e `MONTHLY_GENERATION_BUDGET` (USD). Providers pagos só rodam com limite configurado e dentro dele (0 = bloqueado); o mock não consome orçamento.
+- **Proveniência**: receitas guardam `source_type`, `source_job_id`, `template_version`, `provider`, `model`, `generated_at`, `approved_by`, `approved_at`; assets gerados guardam template, provider, modelo e prompt. Imagem aprovada nunca é regenerada automaticamente.
+
+```bash
+npm run db:migrate:local      # aplica 0002_factory.sql (produção: db:migrate:production)
+npm run smoke:factory         # critério de sucesso §49; rode num banco recém-resetado (o catálogo do mock é finito)
+```
+
 ## Autenticação
 Nenhuma rota administrativa é pública. Em produção o Worker valida o JWT do **Cloudflare Access**
 (`Cf-Access-Jwt-Assertion`: RS256 pelo JWKS do time, `aud`, `iss`, `exp`). Sem `CF_ACCESS_TEAM_DOMAIN`/`CF_ACCESS_AUD`

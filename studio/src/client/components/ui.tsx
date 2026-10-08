@@ -128,7 +128,7 @@ export function FilterBar({ children }: { children: ReactNode }) {
 
 export function Select({ value, onChange, label, children }: { value: string; onChange: (v: string) => void; label: string; children: ReactNode }) {
   return (
-    <select value={value} onChange={(e) => onChange(e.target.value)} aria-label={label} className={`${inputCls} w-auto pr-8`}>
+    <select value={value} onChange={(e) => onChange(e.target.value)} aria-label={label} className={`${inputCls.replace("w-full", "w-auto")} pr-8`}>
       {children}
     </select>
   );

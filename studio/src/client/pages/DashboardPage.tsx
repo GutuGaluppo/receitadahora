@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { api, useApi, type Batch, type Coverage } from "../api";
 import { BatchProgress } from "../components/batch";
 import { useToast } from "../components/toast";
+import { FactoryStateBadge, type FactoryState, type Summary, type Job } from "./factory/shared";
 import { Button, Card, EmptyState, ErrorState, Loading, PageHeader, ProgressBar } from "../components/ui";
 
 type Dash = {
@@ -17,6 +18,7 @@ export function DashboardPage() {
   const { data, error, loading, reload } = useApi<Dash>("/dashboard");
   const nav = useNavigate();
   const toast = useToast();
+  const fac = useApi<{ state: FactoryState; current: { job: Job; batch: { id: string; number: number } | null; summary: Summary } | null }>("/factory/overview");
 
   async function newBatch() {
     try {
@@ -52,6 +54,18 @@ export function DashboardPage() {
             </>
           ) : (
             <EmptyState title="Nenhum lote ainda." hint="Um lote agrupa as receitas de uma rodada de produção." action={<Button variant="primary" onClick={newBatch}>Criar lote #001</Button>} />
+          )}
+        </Card>
+
+        <Card title="Factory" actions={<span className="flex items-center gap-3">{fac.data && <FactoryStateBadge state={fac.data.state} />}<Link className="text-sm text-zinc-600 underline underline-offset-4" to="/factory">Abrir</Link></span>}>
+          {fac.data?.current?.batch ? (
+            <>
+              <p className="text-zinc-500">Lote atual <Link className="font-medium text-zinc-900 underline underline-offset-4" to={`/lotes/${fac.data.current.batch.id}`}>#{String(fac.data.current.batch.number).padStart(3, "0")}</Link></p>
+              <p className="mt-2"><span className="tabular text-3xl font-semibold">{fac.data.current.summary.generated}</span> <span className="text-zinc-500">geradas</span></p>
+              <p className="mt-1 text-zinc-500">{fac.data.current.summary.ready_for_review} em revisão · {fac.data.current.summary.duplicates} duplicidades · {fac.data.current.summary.ingredient_assets_missing} assets ausentes</p>
+            </>
+          ) : (
+            <EmptyState title="Nenhuma geração ainda." hint="Gere um lote de receitas a partir de um brief." action={<Link to="/factory/generate"><Button variant="primary">Generate</Button></Link>} />
           )}
         </Card>
 

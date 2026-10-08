@@ -17,6 +17,8 @@ export type RecipeRow = {
   servings: number; difficulty: "easy" | "medium" | "hard"; instructions: string; tags: string; visual_ingredients: string;
   status: RecipeStatus; reject_reason: string | null; batch_id: string | null; hero_asset_id: string | null;
   created_at: string; updated_at: string; published_at: string | null; deleted_at: string | null;
+  source_type: "manual" | "generated" | "imported"; source_job_id: string | null; template_version: string | null; provider: string | null; model: string | null;
+  generated_at: string | null; approved_by: string | null; approved_at: string | null;
 };
 
 export const assetUrl = (key: string) => `/api/assets/${key}`;
@@ -90,6 +92,10 @@ export async function getRecipeFull(db: D, id: string) {
     instructions: json<string[]>(r.instructions, []), tags: json<string[]>(r.tags, []),
     visual_ingredients: json<string[]>(r.visual_ingredients, []),
     status: r.status, reject_reason: r.reject_reason, batch, created_at: r.created_at, updated_at: r.updated_at, published_at: r.published_at,
+    provenance: {
+      source_type: r.source_type, source_job_id: r.source_job_id, template_version: r.template_version, provider: r.provider, model: r.model,
+      generated_at: r.generated_at, approved_by: r.approved_by, approved_at: r.approved_at,
+    },
     hero: assetView(hero),
     hero_versions: versions.map((v) => assetView(v)!),
     ingredients: ings.map((i) => ({

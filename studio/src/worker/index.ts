@@ -3,6 +3,7 @@ import type { AppEnv } from "./env";
 import { requireAuth } from "./auth";
 import { batches } from "./routes/batches";
 import { dashboard } from "./routes/dashboard";
+import { factory } from "./routes/factory";
 import { ingredients } from "./routes/ingredients";
 import { publicApi } from "./routes/public";
 import { recipes } from "./routes/recipes";
@@ -26,6 +27,7 @@ app.route("/api/ingredients", ingredients);
 app.route("/api/recipes", recipes);
 app.route("/api/batches", batches);
 app.route("/api/review", review);
+app.route("/api/factory", factory);
 
 /** Arquivos do R2 para o painel (qualquer status). */
 app.get("/api/assets/*", async (c) => {

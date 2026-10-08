@@ -57,7 +57,7 @@ export interface Progress {
   counts: { approved: number; review: number; pending: number };
   items: { position: number; id: string; name: string; slug: string; status: RecipeStatus; recipe_ok: boolean; hero: AssetState; ingredients_missing: number; approved: boolean }[];
 }
-export interface Batch { id: string; number: number; status: "open" | "completed"; created_at: string; completed_at: string | null; progress: Progress }
+export interface Batch { id: string; number: number; source?: "manual" | "factory"; status: "open" | "completed"; created_at: string; completed_at: string | null; progress: Progress }
 export interface Coverage { total: number; with_image: number; pending: number; review: number; rejected: number; missing: number; percent: number }
 export interface IngredientItem {
   id: string; name: string; slug: string; recipe_count: number; updated_at: string; state: AssetState;

@@ -92,6 +92,7 @@ describe("status automático", () => {
 const recipe = (over: Partial<RecipeFull> = {}): RecipeFull => ({
   id: "r", name: "Massa", slug: "massa", description: "", category: "Massas", prep_time: 10, cook_time: 10, servings: 2, difficulty: "easy",
   instructions: ["a"], tags: [], visual_ingredients: [], status: "approved", reject_reason: null, batch: null, created_at: "", updated_at: "", published_at: null,
+  provenance: { source_type: "manual", source_job_id: null, template_version: null, provider: null, model: null, generated_at: null, approved_by: null, approved_at: null },
   hero: { id: "h", key: "k", url: "u", filename: "f", mime_type: "image/png", size_bytes: 1, version: 1, status: "approved", reject_reason: null, created_at: "", updated_at: "" },
   hero_versions: [],
   ingredients: [{ id: "x", ingredient_id: "i", name: "Tahine", slug: "tahine", raw_name: "tahine", quantity: 1, unit: "un", note: "", asset: { id: "a", key: "k", url: "u", status: "approved", version: 1 } }],

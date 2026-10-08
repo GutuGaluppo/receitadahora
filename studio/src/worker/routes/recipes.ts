@@ -189,7 +189,7 @@ async function transition(c: import("hono").Context<AppEnv>, action: keyof typeo
 }
 
 recipes.post("/:id/approve", (c) =>
-  transition(c, "approve", async (id) => { await c.env.DB.prepare("UPDATE recipes SET status = 'approved', reject_reason = NULL, updated_at = ? WHERE id = ?").bind(now(), id).run(); return null; }));
+  transition(c, "approve", async (id) => { await c.env.DB.prepare("UPDATE recipes SET status = 'approved', reject_reason = NULL, approved_by = ?, approved_at = ?, updated_at = ? WHERE id = ?").bind(c.get("user"), now(), now(), id).run(); return null; }));
 
 recipes.post("/:id/reject", (c) =>
   transition(c, "reject", async (id) => {

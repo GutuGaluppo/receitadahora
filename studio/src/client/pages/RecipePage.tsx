@@ -22,6 +22,7 @@ type Detail = {
   id: string; name: string; slug: string; description: string; category: string; prep_time: number; cook_time: number; servings: number;
   difficulty: "easy" | "medium" | "hard"; instructions: string[]; tags: string[]; visual_ingredients: string[];
   status: RecipeStatus; reject_reason: string | null; batch: { id: string; number: number } | null; updated_at: string; published_at: string | null;
+  provenance?: { source_type: "manual" | "generated" | "imported"; source_job_id: string | null; template_version: string | null; provider: string | null; model: string | null; generated_at: string | null; approved_by: string | null; approved_at: string | null };
   hero: AssetDetail | null; hero_versions: AssetDetail[];
   ingredients: { id: string; ingredient_id: string; name: string; slug: string; quantity: number | null; unit: string; note: string; asset: { status: Exclude<AssetState, "missing">; url: string } | null }[];
   publish_blockers: Blocker[]; image_prompt: { prompt: string; negative: string };
@@ -286,6 +287,19 @@ export function RecipePage() {
               )}
               <button className="mt-3 text-xs text-zinc-500 underline underline-offset-4" onClick={() => setPrompt(d.image_prompt)}>Ver prompt oficial de imagem</button>
             </Card>
+
+            {d.provenance && d.provenance.source_type !== "manual" && (
+              <Card title="Origem">
+                <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-xs">
+                  <dt className="text-zinc-500">Tipo</dt><dd>{d.provenance.source_type === "generated" ? "Gerada pela Factory" : "Importada"}</dd>
+                  {d.provenance.source_job_id && <><dt className="text-zinc-500">Job</dt><dd><Link className="underline underline-offset-4" to={`/factory/jobs/${d.provenance.source_job_id}`}>ver geração</Link></dd></>}
+                  {d.provenance.template_version && <><dt className="text-zinc-500">Template</dt><dd>{d.provenance.template_version}</dd></>}
+                  {d.provenance.provider && <><dt className="text-zinc-500">Provider</dt><dd>{d.provenance.provider} / {d.provenance.model}</dd></>}
+                  {d.provenance.generated_at && <><dt className="text-zinc-500">Gerada em</dt><dd>{fmtDate(d.provenance.generated_at)}</dd></>}
+                  {d.provenance.approved_by && <><dt className="text-zinc-500">Aprovada por</dt><dd>{d.provenance.approved_by}{d.provenance.approved_at ? ` · ${fmtDate(d.provenance.approved_at)}` : ""}</dd></>}
+                </dl>
+              </Card>
+            )}
 
             <Card title="Status">
               <div className="flex items-center gap-2"><StatusBadge status={d.status} />{d.published_at && <span className="text-xs text-zinc-500">desde {fmtDate(d.published_at)}</span>}</div>

@@ -16,13 +16,16 @@ const PRESENTATION: [RegExp, string][] = [
   [/sobremesa|doce|bolo/i, "on a small ceramic plate, slightly softer light"],
 ];
 
-function seasonalMood(date = new Date()): string {
+export function seasonalMood(date = new Date()): string {
   const m = date.getMonth(); // hemisfério sul
   if (m === 11 || m <= 1) return "bright summer light, fresh colors";
   if (m <= 4) return "cozy autumn, terracotta and pumpkin tones, warm light";
   if (m <= 7) return "winter comfort, amber tones, dense and warm";
   return "spring freshness, light greens, slightly lighter background";
 }
+
+export const presentationFor = (category: string, name: string) =>
+  PRESENTATION.find(([re]) => re.test(`${category} ${name}`))?.[1] ?? "served in a warm-white ceramic bowl";
 
 export type PromptInput = {
   name: string;

@@ -19,41 +19,41 @@ const before = (await api("/api/ingredients")).json.coverage.total;
 // 2/3/4/5. adicionar receitas; identificar ingredientes; reutilizar existentes; novos sem asset
 const recipes = [
   {
-    name: `Bowl de Quinoa ${tag}`, category: "Bowls", prep_time: 10, cook_time: 15, servings: 2,
-    force_duplicate: true, description: "Teste automatizado.", instructions: ["Cozinhe a quinoa.", "Monte o bowl."],
+    name: `Bowl de Pitanga ${tag}`, category: "Bowls", prep_time: 10, cook_time: 15, servings: 2,
+    force_duplicate: true, description: "Teste automatizado.", instructions: ["Cozinhe a pitanga.", "Monte o bowl."],
     ingredients: [
-      { name: `Quinoa ${tag}`, quantity: 1, unit: "xícara" },
+      { name: `Pitanga ${tag}`, quantity: 1, unit: "xícara" },
       { name: "Ovos", quantity: 2, unit: "un" },          // plural → reutiliza "Ovo"
       { name: "sal", quantity: null, unit: "a gosto" },   // minúsculo → reutiliza "Sal"
     ],
   },
   {
-    name: `Omelete de Quinoa ${tag}`, category: "Café da manhã", prep_time: 5, cook_time: 5, servings: 1,
-    force_duplicate: true, description: "Teste automatizado.", instructions: ["Bata os ovos.", `Junte a quinoa ${tag}.`, "Frite."],
+    name: `Omelete de Pitanga ${tag}`, category: "Café da manhã", prep_time: 5, cook_time: 5, servings: 1,
+    force_duplicate: true, description: "Teste automatizado.", instructions: ["Bata os ovos.", `Junte a pitanga ${tag}.`, "Frite."],
     ingredients: [
-      { name: `quinoas ${tag} fresca`, quantity: 3, unit: "colheres" }, // variação → mesmo ingrediente novo
+      { name: `pitangas ${tag} fresca`, quantity: 3, unit: "colheres" }, // variação → mesmo ingrediente novo
       { name: "Ovo", quantity: 3, unit: "un" },
-      { name: `Cogumelo ${tag}`, quantity: 100, unit: "g" },
+      { name: `Jabuticaba ${tag}`, quantity: 100, unit: "g" },
     ],
   },
 ];
 const imp = await api(`/api/batches/${batchId}/import`, { method: "POST", body: { recipes } });
 ok(imp.json.created === 2, "2. Duas receitas importadas no lote", imp.json);
 const created = imp.json.results.filter((r) => r.result === "created");
-ok(created[0].reused_ingredients === 2 && created[0].created_ingredients.length === 1, "3/4. Ovo e Sal reutilizados; Quinoa criada", created[0]);
-ok(created[1].created_ingredients.length === 1 && created[1].created_ingredients[0].startsWith("Cogumelo"), "4. 'quinoas … fresca' resolveu para a MESMA Quinoa (só Cogumelo é novo)", created[1]);
+ok(created[0].reused_ingredients === 2 && created[0].created_ingredients.length === 1, "3/4. Ovo e Sal reutilizados; Pitanga criada", created[0]);
+ok(created[1].created_ingredients.length === 1 && created[1].created_ingredients[0].startsWith("Jabuticaba"), "4. 'pitangas … fresca' resolveu para a MESMA Pitanga (só Jabuticaba é novo)", created[1]);
 const ingList = (await api("/api/ingredients")).json;
-ok(ingList.coverage.total === before + 2, "4. Biblioteca cresceu só com ingredientes realmente novos (Quinoa + Cogumelo)", { before, after: ingList.coverage.total });
-const quinoa = ingList.items.find((i) => i.name === `Quinoa ${tag}`);
-ok(quinoa && quinoa.state === "missing" && quinoa.recipe_count === 2, "5. Quinoa aparece como 'sem asset' e usada por 2 receitas", quinoa);
+ok(ingList.coverage.total === before + 2, "4. Biblioteca cresceu só com ingredientes realmente novos (Pitanga + Jabuticaba)", { before, after: ingList.coverage.total });
+const pitanga = ingList.items.find((i) => i.name === `Pitanga ${tag}`);
+ok(pitanga && pitanga.state === "missing" && pitanga.recipe_count === 2, "5. Pitanga aparece como 'sem asset' e usada por 2 receitas", pitanga);
 
 // dúvida → decisão humana; duplicidade → decisão humana
-const doubt = await api("/api/recipes", { method: "POST", body: { name: `Prato qualquer ${tag}`, category: "Teste", prep_time: 1, instructions: ["x"], ingredients: [{ name: `Cogumelo ${tag} paris` , quantity: 1, unit: "un" }] } });
-ok(doubt.status === 409 && doubt.json.error === "needs_decision" && doubt.json.undecided[0].candidates[0].name === `Cogumelo ${tag}`, "   ingrediente PARECIDO pede decisão humana (não vira entidade nova sozinho)", doubt.json);
-const decided = await api("/api/recipes", { method: "POST", body: { name: `Prato qualquer ${tag}`, category: "Teste", prep_time: 1, instructions: ["x"], ingredients: [{ name: `Cogumelo ${tag} paris`, quantity: 1, unit: "un", ingredient_id: doubt.json.undecided[0].candidates[0].id }] } });
+const doubt = await api("/api/recipes", { method: "POST", body: { name: `Prato qualquer ${tag}`, category: "Teste", prep_time: 1, instructions: ["x"], ingredients: [{ name: `Jabuticaba ${tag} paris` , quantity: 1, unit: "un" }] } });
+ok(doubt.status === 409 && doubt.json.error === "needs_decision" && doubt.json.undecided[0].candidates[0].name === `Jabuticaba ${tag}`, "   ingrediente PARECIDO pede decisão humana (não vira entidade nova sozinho)", doubt.json);
+const decided = await api("/api/recipes", { method: "POST", body: { name: `Prato qualquer ${tag}`, category: "Teste", prep_time: 1, instructions: ["x"], ingredients: [{ name: `Jabuticaba ${tag} paris`, quantity: 1, unit: "un", ingredient_id: doubt.json.undecided[0].candidates[0].id }] } });
 ok(decided.status === 201, "   decisão 'usar existente' respeitada", decided.json);
 if (decided.ok) await api(`/api/recipes/${decided.json.id}`, { method: "DELETE" });
-const dup = await api("/api/recipes", { method: "POST", body: { ...recipes[0], force_duplicate: false, name: `Bowl de Quinoa ${tag} com ovos` } });
+const dup = await api("/api/recipes", { method: "POST", body: { ...recipes[0], force_duplicate: false, name: `Bowl de Pitanga ${tag} com ovos` } });
 
 ok(dup.status === 409 && dup.json.error === "duplicate", "   duplicidade de receita detectada (nome+ingredientes)", dup.json);
 
@@ -64,7 +64,7 @@ ok(early.status === 409 || early.status === 422, "   publicação acidental bloq
 
 // 6. upload das imagens faltantes (R2) — só dos ingredientes ausentes
 const missing = (await api("/api/ingredients?state=missing")).json.items.filter((i) => i.name.endsWith(tag));
-ok(missing.length === 2, "6. Só 2 assets ausentes a gerar (Quinoa, Cogumelo)", missing.map((m) => m.name));
+ok(missing.length === 2, "6. Só 2 assets ausentes a gerar (Pitanga, Jabuticaba)", missing.map((m) => m.name));
 for (const [i, m] of missing.entries()) {
   const up = await upload(`/api/ingredients/${m.id}/asset`, [60 * (i + 1), 120, 80], `${m.slug}.png`);
   ok(up.status === 201, `   upload ${m.name} → R2`, up.json);
@@ -125,7 +125,7 @@ const dash = (await api("/api/dashboard")).json;
 ok(dash.ingredients.total === before + 2 && typeof dash.ingredients.percent === "number", "    dashboard e cobertura coerentes", dash.ingredients);
 
 // exclusão em uso mostra o impacto
-const del = await api(`/api/ingredients/${quinoa.id}`, { method: "DELETE" });
+const del = await api(`/api/ingredients/${pitanga.id}`, { method: "DELETE" });
 ok(del.status === 409 && del.json.used_by.length === 2, "    excluir ingrediente em uso é bloqueado e mostra as receitas", del.json);
 
 console.log(failures ? `\n${failures} verificação(ões) falharam` : "\nFluxo completo OK");

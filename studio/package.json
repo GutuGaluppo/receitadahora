@@ -16,7 +16,8 @@
     "db:reset:local": "rm -rf .wrangler/state && npm run db:migrate:local && npm run db:seed:local",
     "db:migrate:production": "wrangler d1 migrations apply studio-db --env production --remote",
     "deploy:production": "npm run build && wrangler deploy --env production",
-    "smoke": "node scripts/smoke.mjs"
+    "smoke": "node scripts/smoke.mjs",
+    "smoke:factory": "node scripts/smoke-factory.mjs"
   },
   "dependencies": {
     "hono": "^4.13.13",

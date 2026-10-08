@@ -1,7 +1,7 @@
 const ALPHABET = "0123456789abcdefghjkmnpqrstvwxyz"; // Crockford base32 (minúsculo)
 
 /** ID ordenável por tempo: <prefixo>_<48 bits de timestamp><80 bits aleatórios>. */
-export function newId(prefix: "recipe" | "ingredient" | "asset" | "batch" | "alias" | "ri"): string {
+export function newId(prefix: "recipe" | "ingredient" | "asset" | "batch" | "alias" | "ri" | "job" | "event" | "item" | "template"): string {
   let t = Date.now();
   let time = "";
   for (let i = 0; i < 10; i++) {

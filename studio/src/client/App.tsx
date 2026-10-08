@@ -9,6 +9,11 @@ import { IngredientsPage } from "./pages/IngredientsPage";
 import { RecipePage } from "./pages/RecipePage";
 import { RecipesPage } from "./pages/RecipesPage";
 import { ReviewPage } from "./pages/ReviewPage";
+import { GeneratePage } from "./pages/factory/GeneratePage";
+import { HistoryPage } from "./pages/factory/HistoryPage";
+import { JobPage } from "./pages/factory/JobPage";
+import { QueuePage } from "./pages/factory/QueuePage";
+import { SettingsPage, TemplatesPage } from "./pages/factory/TemplatesSettingsPages";
 
 export function App() {
   const me = useApi<{ user: string; environment: string }>("/me");
@@ -30,6 +35,13 @@ export function App() {
             <Route path="/lotes" element={<BatchesPage />} />
             <Route path="/lotes/:id" element={<BatchPage />} />
             <Route path="/revisao" element={<ReviewPage />} />
+            <Route path="/factory" element={<Navigate to="/factory/generate" replace />} />
+            <Route path="/factory/generate" element={<GeneratePage />} />
+            <Route path="/factory/queue" element={<QueuePage />} />
+            <Route path="/factory/history" element={<HistoryPage />} />
+            <Route path="/factory/templates" element={<TemplatesPage />} />
+            <Route path="/factory/settings" element={<SettingsPage />} />
+            <Route path="/factory/jobs/:id" element={<JobPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>

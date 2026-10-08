@@ -18,7 +18,18 @@
     { "binding": "DB", "database_name": "studio-db", "database_id": "00000000-0000-0000-0000-000000000000", "migrations_dir": "migrations" }
   ],
   "r2_buckets": [{ "binding": "ASSETS_BUCKET", "bucket_name": "receita-da-hora-assets-dev" }],
-  "vars": { "ENVIRONMENT": "development", "ACCESS_BYPASS": "true" },
+  "vars": {
+    "ENVIRONMENT": "development",
+    "ACCESS_BYPASS": "true",
+    // Content Factory — estado inicial obrigatório: texto ligado (mock), imagens e automação desligadas
+    "CONTENT_GENERATION_ENABLED": "true",
+    "IMAGE_GENERATION_ENABLED": "false",
+    "AUTO_BATCH_GENERATION_ENABLED": "false",
+    "DAILY_GENERATION_LIMIT": "0",
+    "MONTHLY_GENERATION_BUDGET": "0",
+    "RECIPE_PROVIDER": "mock",
+    "IMAGE_PROVIDER": "disabled"
+  },
 
   // ───────── production: recursos DIFERENTES, para o dev nunca escrever no banco/bucket de produção ─────────
   "env": {
@@ -31,6 +42,14 @@
       "vars": {
         "ENVIRONMENT": "production",
         "ACCESS_BYPASS": "false",
+        "CONTENT_GENERATION_ENABLED": "true",
+        "IMAGE_GENERATION_ENABLED": "false",
+        "AUTO_BATCH_GENERATION_ENABLED": "false",
+        "DAILY_GENERATION_LIMIT": "0",
+        "MONTHLY_GENERATION_BUDGET": "0",
+        "RECIPE_PROVIDER": "mock",
+        "IMAGE_PROVIDER": "disabled",
+        // OPENAI_API_KEY: nunca aqui — use "wrangler secret put OPENAI_API_KEY --env production"
         // Cloudflare Access: <time>.cloudflareaccess.com e o AUD da aplicação
         "CF_ACCESS_TEAM_DOMAIN": "REPLACE_WITH_TEAM_DOMAIN",
         "CF_ACCESS_AUD": "REPLACE_WITH_ACCESS_AUD"

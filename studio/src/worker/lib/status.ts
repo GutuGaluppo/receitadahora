@@ -34,7 +34,7 @@ export function computeAutoStatus(i: StatusInputs): RecipeStatus {
 
 export const ALLOWED_TRANSITIONS: Record<string, RecipeStatus[]> = {
   approve: ["review"],
-  reject: ["review", "approved"],
+  reject: ["draft", "image_pending", "review", "approved"], // inclui rascunhos gerados que não valem a pena produzir
   reopen: ["rejected"], // rejected → draft
   publish: ["approved"],
   unpublish: ["published"],
