@@ -42,10 +42,11 @@ async function verifyAccessJwt(token: string, team: string, aud: string): Promis
  */
 export const requireAuth: MiddlewareHandler<AppEnv> = async (c, next) => {
   const env = c.env;
-  const production = env.ENVIRONMENT === "production";
+  // ACCESS_BYPASS só vale em desenvolvimento local; staging e produção sempre exigem o Access.
+  const production = env.ENVIRONMENT !== "development";
 
   if (env.ACCESS_BYPASS === "true") {
-    if (production) return c.json({ error: "config", message: "ACCESS_BYPASS não pode estar ativo em produção." }, 500);
+    if (production) return c.json({ error: "config", message: "ACCESS_BYPASS só é permitido em desenvolvimento local." }, 500);
     c.set("user", "dev@local");
     return next();
   }

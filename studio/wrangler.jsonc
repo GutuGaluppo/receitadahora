@@ -1,59 +1,153 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "receita-da-hora-studio",
-  "main": "src/worker/index.ts",
-  "compatibility_date": "2026-10-01",
-  "compatibility_flags": ["nodejs_compat"],
-
-  // SPA do Studio. Só /api/* passa pelo Worker; o resto é servido como asset estático.
-  "assets": {
-    "directory": "./dist/client",
-    "binding": "STATIC",
-    "not_found_handling": "single-page-application",
-    "run_worker_first": ["/api/*"]
-  },
-
-  // ───────── development (padrão): D1 e R2 locais, emulados pelo wrangler em .wrangler/state ─────────
-  "d1_databases": [
-    { "binding": "DB", "database_name": "studio-db", "database_id": "00000000-0000-0000-0000-000000000000", "migrations_dir": "migrations" }
-  ],
-  "r2_buckets": [{ "binding": "ASSETS_BUCKET", "bucket_name": "receita-da-hora-assets-dev" }],
-  "vars": {
-    "ENVIRONMENT": "development",
-    "ACCESS_BYPASS": "true",
-    // Content Factory — estado inicial obrigatório: texto ligado (mock), imagens e automação desligadas
-    "CONTENT_GENERATION_ENABLED": "true",
-    "IMAGE_GENERATION_ENABLED": "false",
-    "AUTO_BATCH_GENERATION_ENABLED": "false",
-    "DAILY_GENERATION_LIMIT": "0",
-    "MONTHLY_GENERATION_BUDGET": "0",
-    "RECIPE_PROVIDER": "mock",
-    "IMAGE_PROVIDER": "disabled"
-  },
-
-  // ───────── production: recursos DIFERENTES, para o dev nunca escrever no banco/bucket de produção ─────────
-  "env": {
-    "production": {
-      "name": "receita-da-hora-studio",
-      "d1_databases": [
-        { "binding": "DB", "database_name": "studio-db", "database_id": "REPLACE_WITH_PRODUCTION_D1_ID", "migrations_dir": "migrations" }
-      ],
-      "r2_buckets": [{ "binding": "ASSETS_BUCKET", "bucket_name": "receita-da-hora-assets" }],
-      "vars": {
-        "ENVIRONMENT": "production",
-        "ACCESS_BYPASS": "false",
-        "CONTENT_GENERATION_ENABLED": "true",
-        "IMAGE_GENERATION_ENABLED": "false",
-        "AUTO_BATCH_GENERATION_ENABLED": "false",
-        "DAILY_GENERATION_LIMIT": "0",
-        "MONTHLY_GENERATION_BUDGET": "0",
-        "RECIPE_PROVIDER": "mock",
-        "IMAGE_PROVIDER": "disabled",
-        // OPENAI_API_KEY: nunca aqui — use "wrangler secret put OPENAI_API_KEY --env production"
-        // Cloudflare Access: <time>.cloudflareaccess.com e o AUD da aplicação
-        "CF_ACCESS_TEAM_DOMAIN": "REPLACE_WITH_TEAM_DOMAIN",
-        "CF_ACCESS_AUD": "REPLACE_WITH_ACCESS_AUD"
-      }
-    }
-  }
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "receita-da-hora-studio",
+	"main": "src/worker/index.ts",
+	"compatibility_date": "2026-10-01",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	// SPA do Studio. O Worker vê TODA requisição (run_worker_first: true) para poder fechar o host público
+	// `content-api.*` (só /api/public/*) e entregar o SPA pelo binding STATIC nos demais hosts.
+	"assets": {
+		"directory": "./dist/client",
+		"binding": "STATIC",
+		"not_found_handling": "single-page-application",
+		"run_worker_first": true
+	},
+	// Nunca exponha o Worker por *.workers.dev nem por URLs de preview: o único caminho é o domínio próprio.
+	"workers_dev": false,
+	"preview_urls": false,
+	// ───────── development (padrão): D1 e R2 locais, emulados pelo wrangler em .wrangler/state ─────────
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "receita-da-hora-studio-dev",
+			"database_id": "00000000-0000-0000-0000-000000000000",
+			"migrations_dir": "migrations"
+		},
+		{
+			"binding": "receita_da_hora_studio_staging",
+			"database_name": "receita-da-hora-studio-staging",
+			"database_id": "0d5595ee-bfc8-4f1f-8e30-8d38f8e00ae7",
+			"remote": true
+		}
+	],
+	"r2_buckets": [
+		{
+			"binding": "ASSETS_BUCKET",
+			"bucket_name": "receita-da-hora-assets-dev"
+		}
+	],
+	"vars": {
+		"ENVIRONMENT": "development",
+		"ACCESS_BYPASS": "true",
+		// Content Factory — estado inicial obrigatório: texto ligado (mock), imagens e automação desligadas
+		"CONTENT_GENERATION_ENABLED": "true",
+		"IMAGE_GENERATION_ENABLED": "false",
+		"AUTO_BATCH_GENERATION_ENABLED": "false",
+		"DAILY_GENERATION_LIMIT": "0",
+		"MONTHLY_GENERATION_BUDGET": "0",
+		"RECIPE_PROVIDER": "mock",
+		"IMAGE_PROVIDER": "disabled"
+		// Em dev local o webhook fica desligado (APP_REVALIDATE_URL ausente). Para testar: crie studio/.dev.vars com
+		// APP_REVALIDATE_URL=http://localhost:3000/api/revalidate e APP_REVALIDATE_SECRET=<mesmo valor de STUDIO_REVALIDATE_SECRET do app>
+	},
+	// ───────── ambientes remotos: recursos DIFERENTES, para staging nunca tocar produção ─────────
+	// Substitua os REPLACE_WITH_* pelos valores reais (ver docs/PASSO_A_PASSO_CONFIGURACAO_MANUAL.md).
+	"env": {
+		"staging": {
+			"name": "receita-da-hora-studio-staging",
+			"workers_dev": false,
+			"preview_urls": false,
+			"d1_databases": [
+				{
+					"binding": "DB",
+					"database_name": "receita-da-hora-studio-staging",
+					"database_id": "0d5595ee-bfc8-4f1f-8e30-8d38f8e00ae7",
+					"migrations_dir": "migrations"
+				}
+			],
+			"r2_buckets": [
+				{
+					"binding": "ASSETS_BUCKET",
+					"bucket_name": "receita-da-hora-assets-staging"
+				}
+			],
+			"vars": {
+				"ENVIRONMENT": "staging",
+				"ACCESS_BYPASS": "false",
+				"CONTENT_GENERATION_ENABLED": "true",
+				"IMAGE_GENERATION_ENABLED": "false",
+				"AUTO_BATCH_GENERATION_ENABLED": "false",
+				"DAILY_GENERATION_LIMIT": "0",
+				"MONTHLY_GENERATION_BUDGET": "0",
+				"RECIPE_PROVIDER": "mock",
+				"IMAGE_PROVIDER": "disabled",
+				"CF_ACCESS_TEAM_DOMAIN": "receitadahora.cloudflareaccess.com",
+				"CF_ACCESS_AUD": "5ecd774ae49fdfefc998e67a3b17155fdd151dda4d47ad52a30b92e6b752c30c",
+				"PUBLIC_API_HOSTNAME": "content-api-staging.receitadahora.eu",
+				"APP_ORIGIN": "https://app-staging.receitadahora.eu",
+				"APP_REVALIDATE_URL": "https://app-staging.receitadahora.eu/api/revalidate"
+				// Segredos: wrangler secret put APP_REVALIDATE_SECRET --env staging
+			},
+			// Rotas por domínio próprio (a zona precisa estar na sua conta Cloudflare)
+			"routes": [
+				{
+					"pattern": "studio-staging.receitadahora.eu",
+					"custom_domain": true
+				},
+				{
+					"pattern": "content-api-staging.receitadahora.eu",
+					"custom_domain": true
+				}
+			]
+		},
+		"production": {
+			"name": "receita-da-hora-studio",
+			"workers_dev": false,
+			"preview_urls": false,
+			"d1_databases": [
+				{
+					"binding": "DB",
+					"database_name": "receita-da-hora-studio-prod",
+					"database_id": "REPLACE_WITH_PRODUCTION_D1_ID",
+					"migrations_dir": "migrations"
+				}
+			],
+			"r2_buckets": [
+				{
+					"binding": "ASSETS_BUCKET",
+					"bucket_name": "receita-da-hora-assets-prod"
+				}
+			],
+			"vars": {
+				"ENVIRONMENT": "production",
+				"ACCESS_BYPASS": "false",
+				"CONTENT_GENERATION_ENABLED": "true",
+				"IMAGE_GENERATION_ENABLED": "false",
+				"AUTO_BATCH_GENERATION_ENABLED": "false",
+				"DAILY_GENERATION_LIMIT": "0",
+				"MONTHLY_GENERATION_BUDGET": "0",
+				"RECIPE_PROVIDER": "mock",
+				"IMAGE_PROVIDER": "disabled",
+				// OPENAI_API_KEY e APP_REVALIDATE_SECRET: nunca aqui — use "wrangler secret put <NOME> --env production"
+				// Cloudflare Access: <time>.cloudflareaccess.com e o AUD da aplicação
+				"CF_ACCESS_TEAM_DOMAIN": "REPLACE_WITH_TEAM_DOMAIN",
+				"CF_ACCESS_AUD": "5ecd774ae49fdfefc998e67a3b17155fdd151dda4d47ad52a30b92e6b752c30c",
+				"PUBLIC_API_HOSTNAME": "REPLACE_WITH_content-api.dominio",
+				"APP_ORIGIN": "REPLACE_WITH_https://app.dominio",
+				"APP_REVALIDATE_URL": "REPLACE_WITH_https://app.dominio/api/revalidate"
+			},
+			"routes": [
+				{
+					"pattern": "REPLACE_WITH_studio.dominio",
+					"custom_domain": true
+				},
+				{
+					"pattern": "REPLACE_WITH_content-api.dominio",
+					"custom_domain": true
+				}
+			]
+		}
+	}
 }

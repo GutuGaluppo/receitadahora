@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ApiError, api, fmtDate, fmtKb, useApi, type AssetDetail, type AssetState, type Batch, type RecipeStatus } from "../api";
 import { AssetPreview, UploadButton } from "../components/assets";
+import { MetadataCard, type Metadata } from "../components/metadata";
 import { useToast } from "../components/toast";
 import { AssetStatus, Button, Card, ConfirmDialog, EmptyState, ErrorState, Field, Loading, PageHeader, StatusBadge, inputCls } from "../components/ui";
 
@@ -23,7 +24,7 @@ type Detail = {
   difficulty: "easy" | "medium" | "hard"; instructions: string[]; tags: string[]; visual_ingredients: string[];
   status: RecipeStatus; reject_reason: string | null; batch: { id: string; number: number } | null; updated_at: string; published_at: string | null;
   provenance?: { source_type: "manual" | "generated" | "imported"; source_job_id: string | null; template_version: string | null; provider: string | null; model: string | null; generated_at: string | null; approved_by: string | null; approved_at: string | null };
-  hero: AssetDetail | null; hero_versions: AssetDetail[];
+  hero: AssetDetail | null; hero_versions: AssetDetail[]; metadata: Metadata;
   ingredients: { id: string; ingredient_id: string; name: string; slug: string; quantity: number | null; unit: string; note: string; asset: { status: Exclude<AssetState, "missing">; url: string } | null }[];
   publish_blockers: Blocker[]; image_prompt: { prompt: string; negative: string };
 };
@@ -300,6 +301,8 @@ export function RecipePage() {
                 </dl>
               </Card>
             )}
+
+            <MetadataCard key={`${d.id}:${d.metadata.reviewed_at ?? ""}`} recipeId={d.id} metadata={d.metadata} onSaved={reload} />
 
             <Card title="Status">
               <div className="flex items-center gap-2"><StatusBadge status={d.status} />{d.published_at && <span className="text-xs text-zinc-500">desde {fmtDate(d.published_at)}</span>}</div>

@@ -1,0 +1,18 @@
+# Redeploya o app todos os dias para o `prebuild` regravar src/data/catalog.snapshot.json a partir do Studio.
+# O snapshot é a rede de segurança quando o Studio fica fora do ar e expira em SNAPSHOT_MAX_AGE_HOURS (padrão 72 h).
+# Requer o secret VERCEL_DEPLOY_HOOK_PRODUCTION (Vercel → Project → Settings → Git → Deploy Hooks).
+name: Refresh catalog snapshot
+on:
+  schedule:
+    - cron: "0 8 * * *" # 08:00 UTC
+  workflow_dispatch:
+jobs:
+  redeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel deploy hook
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK_PRODUCTION }}
+        run: |
+          test -n "$HOOK" || { echo "VERCEL_DEPLOY_HOOK_PRODUCTION não configurado"; exit 1; }
+          curl --fail --silent --show-error -X POST "$HOOK"

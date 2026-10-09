@@ -8,6 +8,16 @@ export type Env = {
   CF_ACCESS_TEAM_DOMAIN?: string;
   CF_ACCESS_AUD?: string;
 
+  /** Hostname do host público de leitura (ex.: content-api.exemplo.com). Nele só /api/public/* responde. */
+  PUBLIC_API_HOSTNAME?: string;
+  /** Origem do app (CORS das rotas legadas). Vazio = sem CORS. */
+  APP_ORIGIN?: string;
+  /** Webhook de revalidação do app. O segredo é um Workers secret (wrangler secret put APP_REVALIDATE_SECRET). */
+  APP_REVALIDATE_URL?: string;
+  APP_REVALIDATE_SECRET?: string;
+  /** Opcional (Workers secret): token "Protection Bypass for Automation" do Vercel, se o app estiver atrás de Deployment Protection (ex.: staging). */
+  APP_REVALIDATE_BYPASS?: string;
+
   // ───────── Content Factory ─────────
   // Tudo que pode gerar custo externo nasce desligado. O backend bloqueia mesmo que o frontend seja manipulado.
   CONTENT_GENERATION_ENABLED?: string;

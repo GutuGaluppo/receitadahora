@@ -95,6 +95,11 @@ const recipe = (over: Partial<RecipeFull> = {}): RecipeFull => ({
   provenance: { source_type: "manual", source_job_id: null, template_version: null, provider: null, model: null, generated_at: null, approved_by: null, approved_at: null },
   hero: { id: "h", key: "k", url: "u", filename: "f", mime_type: "image/png", size_bytes: 1, version: 1, status: "approved", reject_reason: null, created_at: "", updated_at: "" },
   hero_versions: [],
+  metadata: {
+    meal_types: ["lunch"], dietary_tags: [], allergens: [], ingredients_tags: ["tahine"], cuisine: "libanesa",
+    traits: { comfort: 50, lightness: 50, protein: 50, cost: 50, novelty: 50 }, weather_affinity: { hot: 50, mild: 50, cold: 50, rainy: 50 },
+    palette_key: "warm", nutrition: null, featured: false, legacy_ids: [], legacy_import: false, reviewed_by: "a@b.c", reviewed_at: "2026-01-01T00:00:00Z",
+  },
   ingredients: [{ id: "x", ingredient_id: "i", name: "Tahine", slug: "tahine", raw_name: "tahine", quantity: 1, unit: "un", note: "", asset: { id: "a", key: "k", url: "u", status: "approved", version: 1 } }],
   ...over,
 });
@@ -128,5 +133,29 @@ describe("prompt de imagem (Recipe Photography System)", () => {
     expect(prompt).toContain("shallow warm-white ceramic bowl");
     expect(prompt).toContain("No ingredients not listed in the recipe.");
     expect(negative).toContain("hands");
+  });
+});
+
+describe("publicação: metadados e segurança alimentar", () => {
+  const codes = (r: RecipeFull) => publishBlockers(r).map((b) => b.code);
+  const meta = (over: Partial<RecipeFull["metadata"]>) => ({ ...recipe().metadata, ...over });
+
+  it("allergens = null (não revisado) bloqueia, com mensagem específica", () => {
+    const b = publishBlockers(recipe({ metadata: meta({ allergens: null }) }));
+    expect(b.map((x) => x.code)).toContain("allergens_not_reviewed");
+    expect(b.find((x) => x.code === "allergens_not_reviewed")!.message).toBe("Revise os alérgenos antes de publicar.");
+  });
+  it("allergens = [] (revisado, nenhum) NÃO bloqueia", () => expect(codes(recipe({ metadata: meta({ allergens: [] }) }))).not.toContain("allergens_not_reviewed"));
+  it("sem confirmação humana registrada bloqueia", () => expect(codes(recipe({ metadata: meta({ reviewed_at: null }) }))).toContain("metadata_not_confirmed"));
+  it("metadados incompletos listam o que falta", () => {
+    const b = publishBlockers(recipe({ metadata: meta({ traits: null, palette_key: null, meal_types: [] }) })).find((x) => x.code === "metadata_incomplete")!;
+    expect(b.items).toEqual(expect.arrayContaining(["perfil da receita (traits)", "paleta", "refeições"]));
+  });
+  it("importada (legacy_import) publica sem fotos, mas continua exigindo alérgenos", () => {
+    const legacy = recipe({ hero: null, ingredients: [], metadata: meta({ legacy_import: true, allergens: null }) });
+    const c = codes(legacy);
+    expect(c).not.toContain("no_hero");
+    expect(c).not.toContain("ingredient_assets");
+    expect(c).toContain("allergens_not_reviewed");
   });
 });

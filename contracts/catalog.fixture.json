@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-08T12:00:00.000Z",
+  "recipes": [
+    {
+      "id": "recipe_fixture0000000001",
+      "slug": "pasta-cremosa-de-abobora",
+      "legacyIds": ["pasta-cremosa-abobora"],
+      "title": "Pasta Cremosa de Abóbora",
+      "description": "Cremosa, reconfortante e pronta em meia hora.",
+      "imageUrl": "/api/public/assets/recipes/pasta-cremosa-de-abobora/hero-v1.webp",
+      "prepTimeMinutes": 30,
+      "servings": 2,
+      "cuisine": "italiana",
+      "featured": true,
+      "mealTypes": ["lunch", "dinner"],
+      "dietaryTags": ["vegetarian"],
+      "ingredientsTags": ["abóbora", "massa", "leite", "glúten"],
+      "allergens": ["leite", "glúten"],
+      "nutrition": { "calories": 520 },
+      "traits": { "comfort": 85, "lightness": 40, "protein": 30, "cost": 30, "novelty": 40 },
+      "weatherAffinity": { "hot": 20, "mild": 60, "cold": 90, "rainy": 90 },
+      "paletteKey": "warm",
+      "ingredients": [
+        { "item": "Abóbora", "quantity": 300, "unit": "g", "imageUrl": null },
+        { "item": "Massa", "quantity": 200, "unit": "g" },
+        { "item": "Sal", "quantity": null, "unit": "", "note": "a gosto" }
+      ],
+      "steps": [
+        { "number": 1, "instruction": "Cozinhe a abóbora até ficar macia." },
+        { "number": 2, "instruction": "Bata com o leite e misture à massa." }
+      ],
+      "publishedAt": "2026-10-01T12:00:00.000Z"
+    }
+  ]
+}
