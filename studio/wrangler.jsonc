@@ -133,7 +133,7 @@
 				// OPENAI_API_KEY e APP_REVALIDATE_SECRET: nunca aqui — use "wrangler secret put <NOME> --env production"
 				// Cloudflare Access: <time>.cloudflareaccess.com e o AUD da aplicação
 				"CF_ACCESS_TEAM_DOMAIN": "REPLACE_WITH_TEAM_DOMAIN",
-				"CF_ACCESS_AUD": "5ecd774ae49fdfefc998e67a3b17155fdd151dda4d47ad52a30b92e6b752c30c",
+				"CF_ACCESS_AUD": "REPLACE_WITH_ACCESS_AUD",
 				"PUBLIC_API_HOSTNAME": "REPLACE_WITH_content-api.dominio",
 				"APP_ORIGIN": "REPLACE_WITH_https://app.dominio",
 				"APP_REVALIDATE_URL": "REPLACE_WITH_https://app.dominio/api/revalidate"
