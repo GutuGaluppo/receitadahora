@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/snapshot-catalog.mjs",
     "build": "next build",
+    "snapshot": "node scripts/snapshot-catalog.mjs",
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
@@ -13,6 +15,8 @@
     "e2e": "playwright test"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.117.3",
     "framer-motion": "^14.0.0",
     "next": "16.4.0",
     "react": "19.3.0",

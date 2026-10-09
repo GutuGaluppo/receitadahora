@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { RECIPES } from "@/data/recipes";
 import { DIET_OPTIONS, GOAL_OPTIONS, MAX_GOALS, TIME_OPTIONS } from "@/lib/options";
 import { splitTerms } from "@/lib/text";
 import { paletteBackground, paletteVars } from "@/lib/theme";
@@ -14,11 +13,11 @@ import {
   ArrowRight, Bolt, Bottle, Check, Clock, Coins, Dumbbell, Heart, Leaf, Pencil, Pin, Plus, Sparkle, Wheat,
 } from "./icons";
 import { useApp } from "./providers/AppProvider";
+import { useCatalog } from "./providers/CatalogProvider";
 import { RecipeImage } from "./RecipeImage";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const QUESTIONS = 4;
-const HERO = RECIPES.find((r) => r.id === "pasta-cremosa-abobora")!;
 
 const DIET_ICON: Record<DietaryPreference, typeof Leaf> = {
   vegetarian: Leaf,
@@ -84,6 +83,8 @@ const outline =
   "themed inline-flex h-14 w-full items-center justify-center rounded-full border border-strong/35 px-8 text-[17px] font-medium text-strong hover:bg-strong/5";
 
 export function Onboarding() {
+  // O Gate só renderiza o onboarding com catálogo não vazio; o herói vem do Studio (featured ou a 1ª receita).
+  const HERO = useCatalog().hero!;
   const { completeOnboarding } = useApp();
   const [step, setStep] = useState(0); // 0 = boas-vindas; 1..4 = perguntas
   const [diet, setDiet] = useState<DietaryPreference[]>([]);

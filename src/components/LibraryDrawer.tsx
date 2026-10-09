@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { AccountPanel } from "./AccountPanel";
 import { ChevronLeft, Close, Sliders } from "./icons";
 import { SavedRecipes } from "./SavedRecipes";
 import { TasteProfile } from "./TasteProfile";
@@ -92,6 +93,7 @@ export function LibraryDrawer({
                     </div>
                   </header>
                   <SavedRecipes onOpen={onOpenRecipe} />
+                  <AccountPanel />
                 </>
               ) : (
                 <>

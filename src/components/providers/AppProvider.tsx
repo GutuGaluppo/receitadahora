@@ -11,6 +11,11 @@ import {
   uid,
   type AppData,
 } from "@/services/storage";
+import { translateLegacyIds } from "@/lib/legacy-ids";
+import { eraseRemote } from "@/services/cloud-sync";
+import { useAuth } from "./AuthProvider";
+import { useCatalog } from "./CatalogProvider";
+import { useCloudSync } from "./useCloudSync";
 import type {
   FeedbackReason,
   RecommendationEventType,
@@ -64,6 +69,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setData(next);
     saveData(next);
   }, []);
+
+  // Ids do catálogo antigo → ids do Studio (salvos, feedback, eventos). Idempotente; ids sem tradução são preservados.
+  const { legacyMap } = useCatalog();
+  useEffect(() => {
+    if (!ready) return;
+    const { data: translated, changed } = translateLegacyIds(dataRef.current, legacyMap);
+    if (changed) commit(translated);
+  }, [ready, legacyMap, commit]);
 
   const profile = useMemo(() => data.profile ?? FALLBACK_PROFILE, [data.profile]);
 
@@ -155,13 +168,21 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const getData = useCallback(() => dataRef.current, []);
 
+  // Sincronização com a conta (no-op sem sessão).
+  const { user, supabase } = useAuth();
+  const { resetKnown } = useCloudSync({ ready, user, supabase, data, getData, replace: commit });
+
   const exportData = useCallback(() => JSON.stringify(dataRef.current, null, 2), []);
 
   const eraseAll = useCallback(() => {
     clearData();
     dataRef.current = emptyData();
     setData(dataRef.current);
-  }, []);
+    // Com sessão ativa, "apagar tudo" apaga também o que está no servidor.
+    if (user && supabase) {
+      eraseRemote(supabase, user.id).then(resetKnown).catch((e) => console.warn("não foi possível limpar o servidor", e instanceof Error ? e.message : e));
+    }
+  }, [user, supabase, resetKnown]);
 
   const value = useMemo<AppContextValue>(
     () => ({
