@@ -12,7 +12,7 @@
     "isolatedModules": true,
     "resolveJsonModule": true,
     "noUncheckedIndexedAccess": false,
-    "paths": { "@/*": ["./src/*"] }
+    "paths": { "@/*": ["./src/*"], "@contracts/*": ["../contracts/*"] }
   },
-  "include": ["src", "tests", "vite.config.ts"]
+  "include": ["src", "tests", "vite.config.ts", "../contracts"]
 }

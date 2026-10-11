@@ -3,6 +3,7 @@ import { toRef, type IngredientRef } from "./matching";
 import { computeAutoStatus, type RecipeStatus } from "./status";
 import { slugify } from "./text";
 import type { RecipeFingerprint } from "./duplicates";
+import { parseJson, type RecipeMetadata } from "./metadata";
 
 export type D = D1Database;
 
@@ -19,6 +20,9 @@ export type RecipeRow = {
   created_at: string; updated_at: string; published_at: string | null; deleted_at: string | null;
   source_type: "manual" | "generated" | "imported"; source_job_id: string | null; template_version: string | null; provider: string | null; model: string | null;
   generated_at: string | null; approved_by: string | null; approved_at: string | null;
+  legacy_ids: string; meal_types: string | null; dietary_tags: string | null; allergens: string | null; ingredients_tags: string | null;
+  cuisine: string; traits: string | null; weather_affinity: string | null; palette_key: string | null; nutrition: string | null;
+  featured: number; legacy_import: number; metadata_reviewed_by: string | null; metadata_reviewed_at: string | null;
 };
 
 export const assetUrl = (key: string) => `/api/assets/${key}`;
@@ -91,6 +95,22 @@ export async function getRecipeFull(db: D, id: string) {
     prep_time: r.prep_time, cook_time: r.cook_time, servings: r.servings, difficulty: r.difficulty,
     instructions: json<string[]>(r.instructions, []), tags: json<string[]>(r.tags, []),
     visual_ingredients: json<string[]>(r.visual_ingredients, []),
+    metadata: {
+      meal_types: parseJson<string[] | null>(r.meal_types, null),
+      dietary_tags: parseJson<string[] | null>(r.dietary_tags, null),
+      allergens: parseJson<string[] | null>(r.allergens, null),
+      ingredients_tags: parseJson<string[] | null>(r.ingredients_tags, null),
+      cuisine: r.cuisine ?? "",
+      traits: parseJson<RecipeMetadata["traits"]>(r.traits, null),
+      weather_affinity: parseJson<RecipeMetadata["weather_affinity"]>(r.weather_affinity, null),
+      palette_key: r.palette_key,
+      nutrition: parseJson<RecipeMetadata["nutrition"]>(r.nutrition, null),
+      featured: !!r.featured,
+      legacy_ids: parseJson<string[]>(r.legacy_ids, []),
+      legacy_import: !!r.legacy_import,
+      reviewed_by: r.metadata_reviewed_by,
+      reviewed_at: r.metadata_reviewed_at,
+    } satisfies RecipeMetadata,
     status: r.status, reject_reason: r.reject_reason, batch, created_at: r.created_at, updated_at: r.updated_at, published_at: r.published_at,
     provenance: {
       source_type: r.source_type, source_job_id: r.source_job_id, template_version: r.template_version, provider: r.provider, model: r.model,

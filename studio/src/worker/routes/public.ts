@@ -3,13 +3,30 @@ import { cors } from "hono/cors";
 import type { AppEnv } from "../env";
 import { fail } from "../lib/http";
 import { publicAssetUrl } from "../lib/repo";
+import { buildCatalog, etagOf } from "../lib/catalog";
 
 /**
  * Camada pública, separada da administração. Só conteúdo PUBLICADO; nada de drafts,
  * rejeitados, metadata interna, ids de lote ou status.
  */
 export const publicApi = new Hono<AppEnv>();
-publicApi.use("*", cors({ origin: "*", allowMethods: ["GET", "HEAD", "OPTIONS"] }));
+// O app consome no servidor e imagens (<img>) não usam CORS: sem origem configurada, nenhum origin é liberado.
+publicApi.use("*", cors({ origin: (origin, c) => (c.env.APP_ORIGIN && origin === c.env.APP_ORIGIN ? origin : ""), allowMethods: ["GET", "HEAD", "OPTIONS"] }));
+
+/**
+ * Catálogo v1 — contrato único consumido pelo app (contracts/catalog.ts).
+ * ETag estável (não muda se nada mudou) para requisição condicional.
+ */
+publicApi.get("/v1/catalog", async (c) => {
+  const { catalog, skipped } = await buildCatalog(c.env);
+  if (skipped.length) console.warn("catalog_skipped", JSON.stringify(skipped));
+  const etag = await etagOf(JSON.stringify(catalog.recipes));
+  c.header("ETag", etag);
+  c.header("Cache-Control", "public, max-age=30, must-revalidate");
+  c.header("X-Catalog-Skipped", String(skipped.length));
+  if (c.req.header("if-none-match") === etag) return c.body(null, 304);
+  return c.json(catalog);
+});
 
 const NOT_FOUND = (c: import("hono").Context<AppEnv>) => fail(c, 404, "not_found", "Não encontrado.");
 
@@ -78,5 +95,5 @@ publicApi.get("/assets/*", async (c) => {
   if (!ok) return NOT_FOUND(c);
   const obj = await c.env.ASSETS_BUCKET.get(key);
   if (!obj) return NOT_FOUND(c);
-  return new Response(obj.body, { headers: { "Content-Type": obj.httpMetadata?.contentType ?? "application/octet-stream", "Cache-Control": "public, max-age=31536000, immutable", ETag: obj.httpEtag, "Access-Control-Allow-Origin": "*" } });
+  return new Response(obj.body, { headers: { "Content-Type": obj.httpMetadata?.contentType ?? "application/octet-stream", "Cache-Control": "public, max-age=31536000, immutable", ETag: obj.httpEtag } });
 });

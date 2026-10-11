@@ -3,7 +3,6 @@
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { INTENT_WEIGHTS } from "@/config/recommendation-weights";
-import { RECIPES, RECIPES_BY_ID } from "@/data/recipes";
 import { paletteVars } from "@/lib/theme";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 import { recommend } from "@/services/recommendation";
@@ -15,6 +14,7 @@ import { ArrowRight, ChevronLeft, Heart } from "./icons";
 import { LibraryButton } from "./LibraryButton";
 import { LibraryDrawer } from "./LibraryDrawer";
 import { useApp } from "./providers/AppProvider";
+import { useCatalog } from "./providers/CatalogProvider";
 import { useWeather } from "./providers/WeatherProvider";
 import { RecipeImage } from "./RecipeImage";
 import { Ingredients, RecipeMeta, Steps } from "./RecipeDetails";
@@ -24,6 +24,7 @@ const SWITCH_MS = 650;
 
 export function Home() {
   const { getData, profile, logEvent, giveFeedback, isSaved, toggleSaved } = useApp();
+  const { recipes: catalog, byId } = useCatalog();
   const { status, weather } = useWeather();
   const desktop = useMediaQuery("(min-width: 1024px)");
 
@@ -31,6 +32,7 @@ export function Home() {
   const [homeState, setHomeState] = useState<HomeState>("suggestion");
   const [libraryOpen, setLibraryOpen] = useState(false);
   const [waited, setWaited] = useState(false);
+  const [noMatch, setNoMatch] = useState(false);
 
   const intentRef = useRef<IntentState>({ preference: null, sessionStart: 0, expires: 0 });
   const seenRef = useRef<string[]>([]);
@@ -49,7 +51,7 @@ export function Home() {
       const intent: Intent | null = preference && Date.now() < expires ? preference : null;
       const history = getData();
       const base = {
-        recipes: RECIPES,
+        recipes: catalog as Recipe[],
         profile,
         context: { now: new Date(), weather },
         intent,
@@ -61,7 +63,7 @@ export function Home() {
         recommend({ ...base, excludeIds: current ? [current.id] : [] })
       );
     },
-    [getData, profile, weather],
+    [getData, profile, weather, catalog],
   );
 
   const show = useCallback(
@@ -90,6 +92,7 @@ export function Home() {
     const first = pick(null);
     // eslint-disable-next-line react-hooks/set-state-in-effect -- sugestão inicial depende do clima (assíncrono)
     if (first) show(first);
+    else setNoMatch(true);
   }, [status, waited, pick, show]);
 
   useEffect(() => () => {
@@ -128,7 +131,7 @@ export function Home() {
   };
 
   const openSaved = (id: string) => {
-    const r = RECIPES_BY_ID.get(id);
+    const r = byId.get(id);
     if (!r) return;
     setLibraryOpen(false);
     show(r, "recipeOpen");
@@ -156,6 +159,17 @@ export function Home() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
+
+  if (!recipe && noMatch) {
+    return (
+      <main className="flex min-h-dvh flex-col items-center justify-center gap-3 px-8 text-center">
+        <h1 className="display text-[26px]">Nenhuma receita combina com seu perfil agora</h1>
+        <p className="max-w-sm text-muted">
+          Suas restrições e alergias são sempre respeitadas. Novas receitas chegam em breve; você também pode revisar seu perfil.
+        </p>
+      </main>
+    );
+  }
 
   if (!recipe) {
     return <div className="min-h-dvh" aria-busy="true" aria-label="Escolhendo sua sugestão" />;

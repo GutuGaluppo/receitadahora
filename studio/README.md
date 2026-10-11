@@ -99,7 +99,7 @@ Brief → job → provider → parse JSON → schema → normalização → dupl
 - **Proveniência**: receitas guardam `source_type`, `source_job_id`, `template_version`, `provider`, `model`, `generated_at`, `approved_by`, `approved_at`; assets gerados guardam template, provider, modelo e prompt. Imagem aprovada nunca é regenerada automaticamente.
 
 ```bash
-npm run db:migrate:local      # aplica 0002_factory.sql (produção: db:migrate:production)
+npm run db:migrate:local      # aplica as migrations (staging/produção: db:migrate:staging / db:migrate:production)
 npm run smoke:factory         # critério de sucesso §49; rode num banco recém-resetado (o catálogo do mock é finito)
 ```
 
@@ -109,17 +109,24 @@ Nenhuma rota administrativa é pública. Em produção o Worker valida o JWT do 
 configurados ele responde 503 (falha fechada). `ACCESS_BYPASS=true` só vale em desenvolvimento e é recusado em produção.
 
 ## Ambientes e deploy
-`development` (padrão) usa D1/R2 **locais**. `--env production` usa outro banco e outro bucket, para o dev nunca escrever em produção.
-Passos únicos (exigem a sua conta Cloudflare — não foram executados):
+`development` (padrão) usa D1/R2 **locais**. `--env staging` e `--env production` usam bancos, buckets e domínios próprios
+(`receita-da-hora-studio-{staging,prod}`, `receita-da-hora-assets-{staging,prod}`), para o dev nunca escrever em ambiente real
+nem staging tocar produção. O passo a passo completo (D1, R2, Access, domínios, segredos, webhook) está em
+[`../docs/PASSO_A_PASSO_CONFIGURACAO_MANUAL.md`](../docs/PASSO_A_PASSO_CONFIGURACAO_MANUAL.md).
 
 ```bash
-npx wrangler d1 create studio-db                    # copie o id para env.production.d1_databases[0].database_id
-npx wrangler r2 bucket create receita-da-hora-assets
-# Zero Trust → Access → criar aplicação para o domínio do Studio; preencher CF_ACCESS_TEAM_DOMAIN e CF_ACCESS_AUD em wrangler.jsonc
-npm run db:migrate:production
-npm run deploy:production
+npm run db:migrate:staging   && npm run deploy:staging
+npm run db:migrate:production && npm run deploy:production
+npx wrangler deploy --dry-run --env staging      # valida o bundle sem publicar
 ```
-`npx wrangler deploy --dry-run --env production` valida o bundle sem publicar.
+
+## Integração com o app (catálogo v1)
+- `GET /api/public/v1/catalog` — contrato único (`../contracts/catalog.ts`), com `ETag`. Só receitas **publicadas** e com metadados completos.
+- Host público `content-api.*` (`PUBLIC_API_HOSTNAME`): só `/api/public/*`; o resto responde 404.
+- Publicar/despublicar/editar dispara um webhook assinado (HMAC-SHA256) para `APP_REVALIDATE_URL`.
+- Metadados de recomendação (alérgenos, refeições, dietas, traits, clima, paleta) são confirmados por uma pessoa em **Receita → Metadados**.
+  `allergens = NULL` bloqueia a publicação. A Content Factory nunca preenche esses campos.
+- `npm run import:legacy` gera `seed/legacy-import.sql` com as receitas do catálogo antigo do app (ids antigos em `legacy_ids`).
 
 ## Decisões e limites do MVP
 - **Sem Cloudflare Images**: R2 basta no MVP; as chaves e a tabela `assets` já comportam derivados (`card`, `thumb`, WebP) depois.

@@ -13,6 +13,10 @@ export type RecipePalette = {
 export type Recipe = {
   id: string;
   slug: string;
+  /** Ids do catálogo antigo (escrito à mão) que apontam para esta receita. */
+  legacyIds?: string[];
+  /** Receita herói do onboarding. */
+  featured?: boolean;
   title: string;
   description: string;
   /** Vazio = usa a ilustração de prato gerada a partir da paleta. */
@@ -20,7 +24,8 @@ export type Recipe = {
   prepTimeMinutes: number;
   servings: number;
   cuisine: string;
-  ingredients: { item: string; quantity: number; unit: string; optional?: boolean }[];
+  /** quantity null = "a gosto" (nunca 0). */
+  ingredients: { item: string; quantity: number | null; unit: string; note?: string; optional?: boolean }[];
   steps: { number: number; instruction: string }[];
   mealTypes: MealType[];
   dietaryTags: string[];

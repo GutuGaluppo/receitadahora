@@ -1,0 +1,3173 @@
+{
+  "source": "seed",
+  "schemaVersion": 1,
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "recipes": [
+    {
+      "id": "panqueca-banana-aveia",
+      "slug": "panqueca-banana-aveia",
+      "legacyIds": [],
+      "title": "Panqueca de Banana e Aveia",
+      "description": "Macia, sem açúcar, pronta antes do café esfriar.",
+      "imageUrl": null,
+      "prepTimeMinutes": 12,
+      "servings": 2,
+      "cuisine": "brasileira",
+      "mealTypes": [
+        "breakfast"
+      ],
+      "dietaryTags": [
+        "vegetarian",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "banana",
+        "aveia",
+        "ovo"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 290
+      },
+      "traits": {
+        "comfort": 55,
+        "lightness": 65,
+        "protein": 40,
+        "cost": 20,
+        "novelty": 25
+      },
+      "weatherAffinity": {
+        "hot": 55,
+        "mild": 70,
+        "cold": 55,
+        "rainy": 55
+      },
+      "paletteKey": "morning",
+      "ingredients": [
+        {
+          "item": "Banana madura",
+          "quantity": 2,
+          "unit": "un"
+        },
+        {
+          "item": "Aveia em flocos",
+          "quantity": 6,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Ovo",
+          "quantity": 2,
+          "unit": "un"
+        },
+        {
+          "item": "Canela",
+          "quantity": 1,
+          "unit": "pitada"
+        },
+        {
+          "item": "Óleo de coco",
+          "quantity": 1,
+          "unit": "colher de chá"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Amasse as bananas com um garfo até virar um purê."
+        },
+        {
+          "number": 2,
+          "instruction": "Misture os ovos, a aveia e a canela até ficar homogêneo."
+        },
+        {
+          "number": 3,
+          "instruction": "Aqueça uma frigideira antiaderente com um fio de óleo de coco."
+        },
+        {
+          "number": 4,
+          "instruction": "Despeje porções pequenas e doure 2 minutos de cada lado. Sirva morna."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "tapioca-queijo-coco",
+      "slug": "tapioca-queijo-coco",
+      "legacyIds": [],
+      "title": "Tapioca de Queijo e Coco",
+      "description": "Crocante por fora, macia por dentro. Leve e rápida.",
+      "imageUrl": null,
+      "prepTimeMinutes": 8,
+      "servings": 1,
+      "cuisine": "brasileira",
+      "mealTypes": [
+        "breakfast",
+        "snack"
+      ],
+      "dietaryTags": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredientsTags": [
+        "tapioca",
+        "queijo",
+        "coco",
+        "leite"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 260
+      },
+      "traits": {
+        "comfort": 40,
+        "lightness": 70,
+        "protein": 25,
+        "cost": 25,
+        "novelty": 30
+      },
+      "weatherAffinity": {
+        "hot": 70,
+        "mild": 70,
+        "cold": 40,
+        "rainy": 40
+      },
+      "paletteKey": "morning",
+      "ingredients": [
+        {
+          "item": "Goma de tapioca",
+          "quantity": 4,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Queijo minas",
+          "quantity": 40,
+          "unit": "g"
+        },
+        {
+          "item": "Coco ralado",
+          "quantity": 1,
+          "unit": "colher de sopa"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Aqueça uma frigideira antiaderente em fogo médio, sem óleo."
+        },
+        {
+          "number": 2,
+          "instruction": "Espalhe a goma peneirada formando um disco fino."
+        },
+        {
+          "number": 3,
+          "instruction": "Quando a goma ligar, adicione o queijo e o coco em metade do disco."
+        },
+        {
+          "number": 4,
+          "instruction": "Dobre ao meio, deixe 30 segundos e sirva."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "omelete-ervas",
+      "slug": "omelete-ervas",
+      "legacyIds": [],
+      "title": "Omelete de Ervas Frescas",
+      "description": "Proteína de verdade, sem pressa e sem louça demais.",
+      "imageUrl": null,
+      "prepTimeMinutes": 10,
+      "servings": 1,
+      "cuisine": "francesa",
+      "mealTypes": [
+        "breakfast",
+        "lunch"
+      ],
+      "dietaryTags": [
+        "vegetarian",
+        "gluten-free",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "ovo",
+        "ervas",
+        "cebolinha"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 230
+      },
+      "traits": {
+        "comfort": 40,
+        "lightness": 75,
+        "protein": 85,
+        "cost": 20,
+        "novelty": 30
+      },
+      "weatherAffinity": {
+        "hot": 65,
+        "mild": 70,
+        "cold": 50,
+        "rainy": 45
+      },
+      "paletteKey": "fresh",
+      "ingredients": [
+        {
+          "item": "Ovo",
+          "quantity": 3,
+          "unit": "un"
+        },
+        {
+          "item": "Cebolinha",
+          "quantity": 2,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Salsinha",
+          "quantity": 1,
+          "unit": "colher de sopa"
+        },
+        {
+          "item": "Azeite",
+          "quantity": 1,
+          "unit": "colher de chá"
+        },
+        {
+          "item": "Sal",
+          "quantity": 1,
+          "unit": "pitada"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Bata os ovos com sal e as ervas picadas."
+        },
+        {
+          "number": 2,
+          "instruction": "Aqueça o azeite numa frigideira pequena em fogo médio-baixo."
+        },
+        {
+          "number": 3,
+          "instruction": "Despeje os ovos e, conforme firmarem, leve as bordas para o centro."
+        },
+        {
+          "number": 4,
+          "instruction": "Quando estiver quase firme, dobre ao meio e sirva."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "mingau-aveia-maca",
+      "slug": "mingau-aveia-maca",
+      "legacyIds": [],
+      "title": "Mingau de Aveia com Maçã e Canela",
+      "description": "Quentinho, simples e abraça por dentro.",
+      "imageUrl": null,
+      "prepTimeMinutes": 10,
+      "servings": 1,
+      "cuisine": "internacional",
+      "mealTypes": [
+        "breakfast"
+      ],
+      "dietaryTags": [
+        "vegan",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "aveia",
+        "maçã",
+        "canela"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 280
+      },
+      "traits": {
+        "comfort": 85,
+        "lightness": 60,
+        "protein": 25,
+        "cost": 15,
+        "novelty": 20
+      },
+      "weatherAffinity": {
+        "hot": 10,
+        "mild": 45,
+        "cold": 90,
+        "rainy": 85
+      },
+      "paletteKey": "warm",
+      "ingredients": [
+        {
+          "item": "Aveia em flocos",
+          "quantity": 4,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Bebida vegetal",
+          "quantity": 250,
+          "unit": "ml"
+        },
+        {
+          "item": "Maçã",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Canela em pó",
+          "quantity": 1,
+          "unit": "colher de chá"
+        },
+        {
+          "item": "Mel ou agave",
+          "quantity": 1,
+          "unit": "colher de chá"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Leve a aveia e a bebida vegetal ao fogo baixo, mexendo sempre."
+        },
+        {
+          "number": 2,
+          "instruction": "Corte a maçã em cubos pequenos e junte ao mingau."
+        },
+        {
+          "number": 3,
+          "instruction": "Cozinhe 5 minutos até engrossar."
+        },
+        {
+          "number": 4,
+          "instruction": "Finalize com canela e um fio de mel."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "torrada-abacate-ovo",
+      "slug": "torrada-abacate-ovo",
+      "legacyIds": [],
+      "title": "Torrada de Abacate com Ovo",
+      "description": "Cremosa, crocante e com ovo mole por cima.",
+      "imageUrl": null,
+      "prepTimeMinutes": 10,
+      "servings": 1,
+      "cuisine": "internacional",
+      "mealTypes": [
+        "breakfast",
+        "snack"
+      ],
+      "dietaryTags": [
+        "vegetarian",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "abacate",
+        "pão",
+        "ovo",
+        "trigo",
+        "gluten"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 340
+      },
+      "traits": {
+        "comfort": 45,
+        "lightness": 70,
+        "protein": 45,
+        "cost": 45,
+        "novelty": 35
+      },
+      "weatherAffinity": {
+        "hot": 65,
+        "mild": 75,
+        "cold": 45,
+        "rainy": 45
+      },
+      "paletteKey": "fresh",
+      "ingredients": [
+        {
+          "item": "Pão integral",
+          "quantity": 2,
+          "unit": "fatias"
+        },
+        {
+          "item": "Abacate",
+          "quantity": 0.5,
+          "unit": "un"
+        },
+        {
+          "item": "Ovo",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Limão",
+          "quantity": 0.5,
+          "unit": "un"
+        },
+        {
+          "item": "Pimenta calabresa",
+          "quantity": 1,
+          "unit": "pitada"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Toste o pão até dourar."
+        },
+        {
+          "number": 2,
+          "instruction": "Amasse o abacate com limão e uma pitada de sal."
+        },
+        {
+          "number": 3,
+          "instruction": "Cozinhe o ovo por 6 minutos em água fervente e descasque."
+        },
+        {
+          "number": 4,
+          "instruction": "Espalhe o abacate nas torradas, coroe com o ovo e a pimenta."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "iogurte-frutas-granola",
+      "slug": "iogurte-frutas-granola",
+      "legacyIds": [],
+      "title": "Iogurte com Frutas e Granola",
+      "description": "Fresco, crocante e pronto em dois minutos.",
+      "imageUrl": null,
+      "prepTimeMinutes": 3,
+      "servings": 1,
+      "cuisine": "internacional",
+      "mealTypes": [
+        "breakfast",
+        "snack"
+      ],
+      "dietaryTags": [
+        "vegetarian"
+      ],
+      "ingredientsTags": [
+        "iogurte",
+        "granola",
+        "frutas",
+        "leite",
+        "aveia"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 260
+      },
+      "traits": {
+        "comfort": 20,
+        "lightness": 85,
+        "protein": 35,
+        "cost": 30,
+        "novelty": 10
+      },
+      "weatherAffinity": {
+        "hot": 95,
+        "mild": 70,
+        "cold": 15,
+        "rainy": 10
+      },
+      "paletteKey": "berry",
+      "ingredients": [
+        {
+          "item": "Iogurte natural",
+          "quantity": 170,
+          "unit": "g"
+        },
+        {
+          "item": "Morangos ou manga",
+          "quantity": 1,
+          "unit": "xícara"
+        },
+        {
+          "item": "Granola",
+          "quantity": 3,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Mel",
+          "quantity": 1,
+          "unit": "colher de chá"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Coloque o iogurte numa tigela."
+        },
+        {
+          "number": 2,
+          "instruction": "Corte as frutas e distribua por cima."
+        },
+        {
+          "number": 3,
+          "instruction": "Finalize com granola e um fio de mel na hora de comer."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "smoothie-bowl-cacau",
+      "slug": "smoothie-bowl-cacau",
+      "legacyIds": [],
+      "title": "Smoothie Bowl de Banana e Cacau",
+      "description": "Gelado, doce na medida, com crocante por cima.",
+      "imageUrl": null,
+      "prepTimeMinutes": 7,
+      "servings": 1,
+      "cuisine": "internacional",
+      "mealTypes": [
+        "breakfast",
+        "snack"
+      ],
+      "dietaryTags": [
+        "vegan",
+        "gluten-free",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "banana",
+        "cacau",
+        "amendoim"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 310
+      },
+      "traits": {
+        "comfort": 50,
+        "lightness": 70,
+        "protein": 30,
+        "cost": 40,
+        "novelty": 55
+      },
+      "weatherAffinity": {
+        "hot": 100,
+        "mild": 65,
+        "cold": 10,
+        "rainy": 5
+      },
+      "paletteKey": "berry",
+      "ingredients": [
+        {
+          "item": "Banana congelada",
+          "quantity": 2,
+          "unit": "un"
+        },
+        {
+          "item": "Cacau em pó",
+          "quantity": 1,
+          "unit": "colher de sopa"
+        },
+        {
+          "item": "Pasta de amendoim",
+          "quantity": 1,
+          "unit": "colher de sopa"
+        },
+        {
+          "item": "Bebida vegetal",
+          "quantity": 80,
+          "unit": "ml"
+        },
+        {
+          "item": "Nibs de cacau",
+          "quantity": 1,
+          "unit": "colher de sopa"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Bata no liquidificador a banana congelada, o cacau e a bebida vegetal até ficar cremoso."
+        },
+        {
+          "number": 2,
+          "instruction": "Adicione a pasta de amendoim e pulse rapidamente."
+        },
+        {
+          "number": 3,
+          "instruction": "Transfira para uma tigela e finalize com os nibs."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "cuscuz-ovo",
+      "slug": "cuscuz-ovo",
+      "legacyIds": [],
+      "title": "Cuscuz com Ovo e Manteiga",
+      "description": "Café da manhã nordestino: simples, firme e saboroso.",
+      "imageUrl": null,
+      "prepTimeMinutes": 15,
+      "servings": 2,
+      "cuisine": "brasileira",
+      "mealTypes": [
+        "breakfast",
+        "dinner"
+      ],
+      "dietaryTags": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredientsTags": [
+        "milho",
+        "ovo",
+        "manteiga",
+        "leite"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 330
+      },
+      "traits": {
+        "comfort": 75,
+        "lightness": 55,
+        "protein": 45,
+        "cost": 10,
+        "novelty": 20
+      },
+      "weatherAffinity": {
+        "hot": 30,
+        "mild": 65,
+        "cold": 80,
+        "rainy": 70
+      },
+      "paletteKey": "earth",
+      "ingredients": [
+        {
+          "item": "Flocão de milho",
+          "quantity": 1,
+          "unit": "xícara"
+        },
+        {
+          "item": "Água morna",
+          "quantity": 0.75,
+          "unit": "xícara"
+        },
+        {
+          "item": "Ovo",
+          "quantity": 2,
+          "unit": "un"
+        },
+        {
+          "item": "Manteiga",
+          "quantity": 1,
+          "unit": "colher de sopa"
+        },
+        {
+          "item": "Sal",
+          "quantity": 1,
+          "unit": "pitada"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Hidrate o flocão com água morna e sal por 5 minutos."
+        },
+        {
+          "number": 2,
+          "instruction": "Cozinhe no vapor por 8 minutos até ficar macio."
+        },
+        {
+          "number": 3,
+          "instruction": "Frite os ovos na manteiga."
+        },
+        {
+          "number": 4,
+          "instruction": "Sirva o cuscuz com o ovo por cima."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "pasta-cremosa-abobora",
+      "slug": "pasta-cremosa-abobora",
+      "legacyIds": [],
+      "title": "Pasta Cremosa de Abóbora",
+      "description": "Quente, cremosa e reconfortante para uma noite fria.",
+      "imageUrl": "/recipes/pasta-cremosa-abobora.webp",
+      "prepTimeMinutes": 25,
+      "servings": 2,
+      "cuisine": "italiana",
+      "featured": true,
+      "mealTypes": [
+        "lunch",
+        "dinner"
+      ],
+      "dietaryTags": [
+        "vegetarian"
+      ],
+      "ingredientsTags": [
+        "abóbora",
+        "massa",
+        "pimentão",
+        "trigo",
+        "gluten",
+        "leite"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 340
+      },
+      "traits": {
+        "comfort": 90,
+        "lightness": 40,
+        "protein": 25,
+        "cost": 30,
+        "novelty": 35
+      },
+      "weatherAffinity": {
+        "hot": 10,
+        "mild": 50,
+        "cold": 90,
+        "rainy": 90
+      },
+      "paletteKey": "warm",
+      "ingredients": [
+        {
+          "item": "Massa",
+          "quantity": 250,
+          "unit": "g"
+        },
+        {
+          "item": "Abóbora",
+          "quantity": 300,
+          "unit": "g"
+        },
+        {
+          "item": "Pimentão vermelho",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Alho",
+          "quantity": 1,
+          "unit": "dente"
+        },
+        {
+          "item": "Creme de leite (ou alternativa vegetal)",
+          "quantity": 100,
+          "unit": "ml"
+        },
+        {
+          "item": "Parmesão",
+          "quantity": null,
+          "unit": "a gosto"
+        },
+        {
+          "item": "Azeite de oliva",
+          "quantity": null,
+          "unit": "a gosto"
+        },
+        {
+          "item": "Sal e pimenta",
+          "quantity": null,
+          "unit": "a gosto"
+        },
+        {
+          "item": "Folhas de sálvia",
+          "quantity": null,
+          "unit": "a gosto",
+          "note": "opcional"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Asse a abóbora e o pimentão até ficarem macios."
+        },
+        {
+          "number": 2,
+          "instruction": "Bata com o alho, o creme de leite, azeite, sal e pimenta até formar um molho cremoso."
+        },
+        {
+          "number": 3,
+          "instruction": "Cozinhe a massa conforme as instruções da embalagem."
+        },
+        {
+          "number": 4,
+          "instruction": "Misture a massa ao molho e finalize com parmesão e sálvia."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "salada-grao-de-bico",
+      "slug": "salada-grao-de-bico",
+      "legacyIds": [],
+      "title": "Salada Fresca de Grão-de-bico",
+      "description": "Crocante, cítrica e leve, sem acender o fogão.",
+      "imageUrl": null,
+      "prepTimeMinutes": 10,
+      "servings": 2,
+      "cuisine": "mediterrânea",
+      "mealTypes": [
+        "lunch"
+      ],
+      "dietaryTags": [
+        "vegan",
+        "gluten-free",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "grão-de-bico",
+        "pepino",
+        "tomate",
+        "limão"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 290
+      },
+      "traits": {
+        "comfort": 15,
+        "lightness": 95,
+        "protein": 45,
+        "cost": 25,
+        "novelty": 25
+      },
+      "weatherAffinity": {
+        "hot": 100,
+        "mild": 70,
+        "cold": 10,
+        "rainy": 5
+      },
+      "paletteKey": "fresh",
+      "ingredients": [
+        {
+          "item": "Grão-de-bico cozido",
+          "quantity": 1,
+          "unit": "xícara"
+        },
+        {
+          "item": "Pepino",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Tomate",
+          "quantity": 2,
+          "unit": "un"
+        },
+        {
+          "item": "Cebola roxa",
+          "quantity": 0.5,
+          "unit": "un"
+        },
+        {
+          "item": "Limão",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Azeite",
+          "quantity": 2,
+          "unit": "colheres de sopa"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Escorra e lave o grão-de-bico."
+        },
+        {
+          "number": 2,
+          "instruction": "Corte pepino, tomate e cebola em cubos pequenos."
+        },
+        {
+          "number": 3,
+          "instruction": "Misture tudo com o suco do limão, o azeite e sal."
+        },
+        {
+          "number": 4,
+          "instruction": "Deixe descansar 5 minutos e sirva gelada."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "frango-grelhado-legumes",
+      "slug": "frango-grelhado-legumes",
+      "legacyIds": [],
+      "title": "Frango Grelhado com Legumes Assados",
+      "description": "Proteína de verdade e um prato que se resolve sozinho no forno.",
+      "imageUrl": null,
+      "prepTimeMinutes": 35,
+      "servings": 2,
+      "cuisine": "brasileira",
+      "mealTypes": [
+        "lunch",
+        "dinner"
+      ],
+      "dietaryTags": [
+        "gluten-free",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "frango",
+        "abobrinha",
+        "cenoura",
+        "carne"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 380
+      },
+      "traits": {
+        "comfort": 45,
+        "lightness": 70,
+        "protein": 90,
+        "cost": 40,
+        "novelty": 15
+      },
+      "weatherAffinity": {
+        "hot": 55,
+        "mild": 75,
+        "cold": 55,
+        "rainy": 45
+      },
+      "paletteKey": "earth",
+      "ingredients": [
+        {
+          "item": "Peito de frango",
+          "quantity": 300,
+          "unit": "g"
+        },
+        {
+          "item": "Abobrinha",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Cenoura",
+          "quantity": 2,
+          "unit": "un"
+        },
+        {
+          "item": "Alho",
+          "quantity": 2,
+          "unit": "dentes"
+        },
+        {
+          "item": "Azeite",
+          "quantity": 2,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Limão",
+          "quantity": 1,
+          "unit": "un"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Tempere o frango com alho, limão e sal por 10 minutos."
+        },
+        {
+          "number": 2,
+          "instruction": "Corte os legumes em palitos grossos, regue com azeite e leve ao forno a 220 °C por 20 minutos."
+        },
+        {
+          "number": 3,
+          "instruction": "Grelhe o frango em frigideira bem quente, 5 minutos de cada lado."
+        },
+        {
+          "number": 4,
+          "instruction": "Deixe o frango descansar 3 minutos, fatie e sirva com os legumes."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "arroz-feijao-ovo",
+      "slug": "arroz-feijao-ovo",
+      "legacyIds": [],
+      "title": "Arroz, Feijão e Ovo Frito",
+      "description": "O clássico que nunca erra e custa quase nada.",
+      "imageUrl": null,
+      "prepTimeMinutes": 20,
+      "servings": 2,
+      "cuisine": "brasileira",
+      "mealTypes": [
+        "lunch",
+        "dinner"
+      ],
+      "dietaryTags": [
+        "vegetarian",
+        "gluten-free",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "arroz",
+        "feijão",
+        "ovo"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 520
+      },
+      "traits": {
+        "comfort": 80,
+        "lightness": 45,
+        "protein": 55,
+        "cost": 5,
+        "novelty": 5
+      },
+      "weatherAffinity": {
+        "hot": 40,
+        "mild": 70,
+        "cold": 75,
+        "rainy": 65
+      },
+      "paletteKey": "earth",
+      "ingredients": [
+        {
+          "item": "Arroz cozido",
+          "quantity": 2,
+          "unit": "xícaras"
+        },
+        {
+          "item": "Feijão cozido com caldo",
+          "quantity": 1.5,
+          "unit": "xícaras"
+        },
+        {
+          "item": "Ovo",
+          "quantity": 2,
+          "unit": "un"
+        },
+        {
+          "item": "Alho",
+          "quantity": 1,
+          "unit": "dente"
+        },
+        {
+          "item": "Couve",
+          "quantity": 3,
+          "unit": "folhas"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Aqueça o feijão com o alho dourado em um fio de óleo."
+        },
+        {
+          "number": 2,
+          "instruction": "Fatie a couve bem fina e refogue por 1 minuto."
+        },
+        {
+          "number": 3,
+          "instruction": "Frite os ovos mantendo a gema mole."
+        },
+        {
+          "number": 4,
+          "instruction": "Monte o prato com arroz, feijão, couve e o ovo por cima."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "curry-grao-de-bico-coco",
+      "slug": "curry-grao-de-bico-coco",
+      "legacyIds": [],
+      "title": "Curry de Grão-de-bico e Leite de Coco",
+      "description": "Rico, perfumado e com calor na medida.",
+      "imageUrl": null,
+      "prepTimeMinutes": 30,
+      "servings": 3,
+      "cuisine": "indiana",
+      "mealTypes": [
+        "lunch",
+        "dinner"
+      ],
+      "dietaryTags": [
+        "vegan",
+        "gluten-free",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "grão-de-bico",
+        "coco",
+        "tomate",
+        "curry"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 410
+      },
+      "traits": {
+        "comfort": 85,
+        "lightness": 45,
+        "protein": 45,
+        "cost": 25,
+        "novelty": 65
+      },
+      "weatherAffinity": {
+        "hot": 25,
+        "mild": 55,
+        "cold": 85,
+        "rainy": 80
+      },
+      "paletteKey": "saffron",
+      "ingredients": [
+        {
+          "item": "Grão-de-bico cozido",
+          "quantity": 2,
+          "unit": "xícaras"
+        },
+        {
+          "item": "Leite de coco",
+          "quantity": 200,
+          "unit": "ml"
+        },
+        {
+          "item": "Tomate picado",
+          "quantity": 2,
+          "unit": "un"
+        },
+        {
+          "item": "Cebola",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Curry em pó",
+          "quantity": 2,
+          "unit": "colheres de chá"
+        },
+        {
+          "item": "Gengibre ralado",
+          "quantity": 1,
+          "unit": "colher de chá"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Refogue a cebola e o gengibre até ficarem macios."
+        },
+        {
+          "number": 2,
+          "instruction": "Junte o curry e o tomate e cozinhe 5 minutos até formar um molho."
+        },
+        {
+          "number": 3,
+          "instruction": "Adicione o grão-de-bico e o leite de coco."
+        },
+        {
+          "number": 4,
+          "instruction": "Cozinhe em fogo baixo por 10 minutos. Sirva com arroz ou pão."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "risoto-cogumelos",
+      "slug": "risoto-cogumelos",
+      "legacyIds": [],
+      "title": "Risoto de Cogumelos",
+      "description": "Demora um pouco, mas cada colherada compensa.",
+      "imageUrl": null,
+      "prepTimeMinutes": 40,
+      "servings": 2,
+      "cuisine": "italiana",
+      "mealTypes": [
+        "lunch",
+        "dinner"
+      ],
+      "dietaryTags": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredientsTags": [
+        "arroz",
+        "cogumelo",
+        "queijo",
+        "leite",
+        "manteiga"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 450
+      },
+      "traits": {
+        "comfort": 90,
+        "lightness": 30,
+        "protein": 30,
+        "cost": 55,
+        "novelty": 40
+      },
+      "weatherAffinity": {
+        "hot": 5,
+        "mild": 40,
+        "cold": 95,
+        "rainy": 90
+      },
+      "paletteKey": "cozy",
+      "ingredients": [
+        {
+          "item": "Arroz arbóreo",
+          "quantity": 1,
+          "unit": "xícara"
+        },
+        {
+          "item": "Cogumelos frescos",
+          "quantity": 250,
+          "unit": "g"
+        },
+        {
+          "item": "Caldo de legumes quente",
+          "quantity": 800,
+          "unit": "ml"
+        },
+        {
+          "item": "Cebola",
+          "quantity": 0.5,
+          "unit": "un"
+        },
+        {
+          "item": "Parmesão ralado",
+          "quantity": 3,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Manteiga",
+          "quantity": 1,
+          "unit": "colher de sopa"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Salteie os cogumelos fatiados em fogo alto até dourarem e reserve."
+        },
+        {
+          "number": 2,
+          "instruction": "Refogue a cebola na manteiga, junte o arroz e mexa por 1 minuto."
+        },
+        {
+          "number": 3,
+          "instruction": "Adicione o caldo aos poucos, mexendo, por cerca de 20 minutos."
+        },
+        {
+          "number": 4,
+          "instruction": "Misture os cogumelos, o parmesão e finalize com pimenta-do-reino."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "wrap-frango-abacate",
+      "slug": "wrap-frango-abacate",
+      "legacyIds": [],
+      "title": "Wrap de Frango e Abacate",
+      "description": "Prático para comer em pé ou na mesa de trabalho.",
+      "imageUrl": null,
+      "prepTimeMinutes": 15,
+      "servings": 1,
+      "cuisine": "internacional",
+      "mealTypes": [
+        "lunch",
+        "snack"
+      ],
+      "dietaryTags": [
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "frango",
+        "abacate",
+        "trigo",
+        "gluten",
+        "carne"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 430
+      },
+      "traits": {
+        "comfort": 40,
+        "lightness": 70,
+        "protein": 75,
+        "cost": 45,
+        "novelty": 25
+      },
+      "weatherAffinity": {
+        "hot": 80,
+        "mild": 70,
+        "cold": 30,
+        "rainy": 30
+      },
+      "paletteKey": "fresh",
+      "ingredients": [
+        {
+          "item": "Tortilha de trigo",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Frango desfiado",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "item": "Abacate",
+          "quantity": 0.5,
+          "unit": "un"
+        },
+        {
+          "item": "Alface",
+          "quantity": 3,
+          "unit": "folhas"
+        },
+        {
+          "item": "Limão",
+          "quantity": 0.5,
+          "unit": "un"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Amasse o abacate com limão e sal."
+        },
+        {
+          "number": 2,
+          "instruction": "Aqueça a tortilha por 20 segundos de cada lado."
+        },
+        {
+          "number": 3,
+          "instruction": "Espalhe o abacate, distribua o frango e a alface."
+        },
+        {
+          "number": 4,
+          "instruction": "Enrole bem firme e corte ao meio."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "bowl-quinoa-legumes",
+      "slug": "bowl-quinoa-legumes",
+      "legacyIds": [],
+      "title": "Bowl de Quinoa e Legumes Assados",
+      "description": "Colorido, saciante e quase sem esforço.",
+      "imageUrl": null,
+      "prepTimeMinutes": 35,
+      "servings": 2,
+      "cuisine": "internacional",
+      "mealTypes": [
+        "lunch",
+        "dinner"
+      ],
+      "dietaryTags": [
+        "vegan",
+        "gluten-free",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "quinoa",
+        "batata-doce",
+        "brócolis",
+        "grão-de-bico"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 390
+      },
+      "traits": {
+        "comfort": 50,
+        "lightness": 80,
+        "protein": 55,
+        "cost": 50,
+        "novelty": 50
+      },
+      "weatherAffinity": {
+        "hot": 60,
+        "mild": 80,
+        "cold": 50,
+        "rainy": 40
+      },
+      "paletteKey": "fresh",
+      "ingredients": [
+        {
+          "item": "Quinoa",
+          "quantity": 1,
+          "unit": "xícara"
+        },
+        {
+          "item": "Batata-doce",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Brócolis",
+          "quantity": 1,
+          "unit": "cabeça pequena"
+        },
+        {
+          "item": "Grão-de-bico cozido",
+          "quantity": 1,
+          "unit": "xícara"
+        },
+        {
+          "item": "Azeite",
+          "quantity": 2,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Tahine",
+          "quantity": 1,
+          "unit": "colher de sopa"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Cozinhe a quinoa em duas partes de água por 15 minutos."
+        },
+        {
+          "number": 2,
+          "instruction": "Corte a batata-doce e o brócolis, tempere com azeite e asse a 220 °C por 20 minutos junto com o grão-de-bico."
+        },
+        {
+          "number": 3,
+          "instruction": "Dilua o tahine com limão e água para fazer o molho."
+        },
+        {
+          "number": 4,
+          "instruction": "Monte o bowl e finalize com o molho."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "macarrao-alho-oleo",
+      "slug": "macarrao-alho-oleo",
+      "legacyIds": [],
+      "title": "Macarrão de Alho e Óleo",
+      "description": "Dez minutos, três ingredientes, zero desculpas.",
+      "imageUrl": null,
+      "prepTimeMinutes": 12,
+      "servings": 2,
+      "cuisine": "italiana",
+      "mealTypes": [
+        "lunch",
+        "dinner"
+      ],
+      "dietaryTags": [
+        "vegan",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "massa",
+        "alho",
+        "trigo",
+        "gluten"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 480
+      },
+      "traits": {
+        "comfort": 75,
+        "lightness": 40,
+        "protein": 20,
+        "cost": 5,
+        "novelty": 10
+      },
+      "weatherAffinity": {
+        "hot": 40,
+        "mild": 70,
+        "cold": 65,
+        "rainy": 60
+      },
+      "paletteKey": "tomato",
+      "ingredients": [
+        {
+          "item": "Espaguete",
+          "quantity": 200,
+          "unit": "g"
+        },
+        {
+          "item": "Alho",
+          "quantity": 4,
+          "unit": "dentes"
+        },
+        {
+          "item": "Azeite",
+          "quantity": 4,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Pimenta calabresa",
+          "quantity": 1,
+          "unit": "pitada"
+        },
+        {
+          "item": "Salsinha",
+          "quantity": 2,
+          "unit": "colheres de sopa"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Cozinhe o espaguete em água salgada e guarde uma xícara da água do cozimento."
+        },
+        {
+          "number": 2,
+          "instruction": "Doure o alho fatiado no azeite em fogo baixo, sem queimar."
+        },
+        {
+          "number": 3,
+          "instruction": "Junte o macarrão, a pimenta e um pouco da água do cozimento."
+        },
+        {
+          "number": 4,
+          "instruction": "Misture bem e finalize com salsinha."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "tilapia-limao-batata",
+      "slug": "tilapia-limao-batata",
+      "legacyIds": [],
+      "title": "Tilápia Assada com Limão e Batatas",
+      "description": "Leve, aromática e vai sozinha ao forno.",
+      "imageUrl": null,
+      "prepTimeMinutes": 40,
+      "servings": 2,
+      "cuisine": "mediterrânea",
+      "mealTypes": [
+        "lunch",
+        "dinner"
+      ],
+      "dietaryTags": [
+        "gluten-free",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "peixe",
+        "batata",
+        "limão"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 360
+      },
+      "traits": {
+        "comfort": 40,
+        "lightness": 80,
+        "protein": 85,
+        "cost": 45,
+        "novelty": 35
+      },
+      "weatherAffinity": {
+        "hot": 65,
+        "mild": 80,
+        "cold": 40,
+        "rainy": 35
+      },
+      "paletteKey": "sea",
+      "ingredients": [
+        {
+          "item": "Filé de tilápia",
+          "quantity": 300,
+          "unit": "g"
+        },
+        {
+          "item": "Batata",
+          "quantity": 3,
+          "unit": "un"
+        },
+        {
+          "item": "Limão siciliano",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Alecrim",
+          "quantity": 2,
+          "unit": "ramos"
+        },
+        {
+          "item": "Azeite",
+          "quantity": 3,
+          "unit": "colheres de sopa"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Corte as batatas em rodelas finas e asse com azeite e sal a 200 °C por 15 minutos."
+        },
+        {
+          "number": 2,
+          "instruction": "Tempere o peixe com limão, sal e alecrim."
+        },
+        {
+          "number": 3,
+          "instruction": "Coloque o peixe sobre as batatas e asse por mais 15 minutos."
+        },
+        {
+          "number": 4,
+          "instruction": "Finalize com raspas de limão e um fio de azeite."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "sopa-lentilha",
+      "slug": "sopa-lentilha",
+      "legacyIds": [],
+      "title": "Sopa de Lentilha com Legumes",
+      "description": "Uma panela, pouco custo, e a casa inteira esquenta.",
+      "imageUrl": null,
+      "prepTimeMinutes": 35,
+      "servings": 3,
+      "cuisine": "mediterrânea",
+      "mealTypes": [
+        "dinner",
+        "lunch"
+      ],
+      "dietaryTags": [
+        "vegan",
+        "gluten-free",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "lentilha",
+        "cenoura",
+        "cebola"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 300
+      },
+      "traits": {
+        "comfort": 90,
+        "lightness": 55,
+        "protein": 50,
+        "cost": 5,
+        "novelty": 25
+      },
+      "weatherAffinity": {
+        "hot": 5,
+        "mild": 40,
+        "cold": 95,
+        "rainy": 95
+      },
+      "paletteKey": "cozy",
+      "ingredients": [
+        {
+          "item": "Lentilha",
+          "quantity": 1,
+          "unit": "xícara"
+        },
+        {
+          "item": "Cenoura",
+          "quantity": 2,
+          "unit": "un"
+        },
+        {
+          "item": "Cebola",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Alho",
+          "quantity": 2,
+          "unit": "dentes"
+        },
+        {
+          "item": "Caldo de legumes",
+          "quantity": 1,
+          "unit": "litro"
+        },
+        {
+          "item": "Cominho",
+          "quantity": 1,
+          "unit": "colher de chá"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Refogue cebola e alho em azeite; junte a cenoura em cubos e o cominho."
+        },
+        {
+          "number": 2,
+          "instruction": "Adicione a lentilha lavada e o caldo."
+        },
+        {
+          "number": 3,
+          "instruction": "Cozinhe em fogo médio por 25 minutos até a lentilha ficar macia."
+        },
+        {
+          "number": 4,
+          "instruction": "Amasse levemente com uma colher e finalize com limão."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "caldo-verde",
+      "slug": "caldo-verde",
+      "legacyIds": [],
+      "title": "Caldo Verde",
+      "description": "Clássico português que aquece até o último gole.",
+      "imageUrl": null,
+      "prepTimeMinutes": 40,
+      "servings": 4,
+      "cuisine": "portuguesa",
+      "mealTypes": [
+        "dinner"
+      ],
+      "dietaryTags": [
+        "gluten-free",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "batata",
+        "couve",
+        "linguiça",
+        "carne"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 320
+      },
+      "traits": {
+        "comfort": 95,
+        "lightness": 35,
+        "protein": 45,
+        "cost": 20,
+        "novelty": 30
+      },
+      "weatherAffinity": {
+        "hot": 0,
+        "mild": 35,
+        "cold": 100,
+        "rainy": 95
+      },
+      "paletteKey": "cozy",
+      "ingredients": [
+        {
+          "item": "Batata",
+          "quantity": 4,
+          "unit": "un"
+        },
+        {
+          "item": "Couve",
+          "quantity": 6,
+          "unit": "folhas"
+        },
+        {
+          "item": "Linguiça calabresa",
+          "quantity": 150,
+          "unit": "g"
+        },
+        {
+          "item": "Cebola",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Alho",
+          "quantity": 2,
+          "unit": "dentes"
+        },
+        {
+          "item": "Água",
+          "quantity": 1.2,
+          "unit": "litro"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Refogue a cebola e o alho; junte as batatas em cubos e a água."
+        },
+        {
+          "number": 2,
+          "instruction": "Cozinhe por 20 minutos até desmancharem, e bata no liquidificador."
+        },
+        {
+          "number": 3,
+          "instruction": "Fatie a couve bem fininha e a linguiça em rodelas; doure a linguiça."
+        },
+        {
+          "number": 4,
+          "instruction": "Volte o creme ao fogo, junte a couve e a linguiça e ferva por 3 minutos."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "strogonoff-cogumelos",
+      "slug": "strogonoff-cogumelos",
+      "legacyIds": [],
+      "title": "Strogonoff de Cogumelos",
+      "description": "Todo o conforto do clássico, sem carne.",
+      "imageUrl": null,
+      "prepTimeMinutes": 25,
+      "servings": 2,
+      "cuisine": "russa",
+      "mealTypes": [
+        "dinner",
+        "lunch"
+      ],
+      "dietaryTags": [
+        "vegetarian"
+      ],
+      "ingredientsTags": [
+        "cogumelo",
+        "creme de leite",
+        "leite",
+        "tomate"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 390
+      },
+      "traits": {
+        "comfort": 90,
+        "lightness": 35,
+        "protein": 30,
+        "cost": 40,
+        "novelty": 30
+      },
+      "weatherAffinity": {
+        "hot": 10,
+        "mild": 45,
+        "cold": 90,
+        "rainy": 85
+      },
+      "paletteKey": "tomato",
+      "ingredients": [
+        {
+          "item": "Cogumelos variados",
+          "quantity": 400,
+          "unit": "g"
+        },
+        {
+          "item": "Cebola",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Molho de tomate",
+          "quantity": 3,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Creme de leite",
+          "quantity": 200,
+          "unit": "g"
+        },
+        {
+          "item": "Mostarda",
+          "quantity": 1,
+          "unit": "colher de chá"
+        },
+        {
+          "item": "Arroz",
+          "quantity": 1,
+          "unit": "xícara"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Salteie os cogumelos em fogo alto até dourarem e reserve."
+        },
+        {
+          "number": 2,
+          "instruction": "Refogue a cebola, junte o molho de tomate e a mostarda."
+        },
+        {
+          "number": 3,
+          "instruction": "Volte os cogumelos e adicione o creme de leite."
+        },
+        {
+          "number": 4,
+          "instruction": "Aqueça sem ferver e sirva com arroz."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "sopa-abobora-gengibre",
+      "slug": "sopa-abobora-gengibre",
+      "legacyIds": [],
+      "title": "Sopa de Abóbora com Gengibre",
+      "description": "Aveludada, com um calorzinho que vem do gengibre.",
+      "imageUrl": null,
+      "prepTimeMinutes": 30,
+      "servings": 3,
+      "cuisine": "internacional",
+      "mealTypes": [
+        "dinner"
+      ],
+      "dietaryTags": [
+        "vegan",
+        "gluten-free",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "abóbora",
+        "gengibre",
+        "cebola"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 210
+      },
+      "traits": {
+        "comfort": 85,
+        "lightness": 60,
+        "protein": 15,
+        "cost": 10,
+        "novelty": 30
+      },
+      "weatherAffinity": {
+        "hot": 5,
+        "mild": 40,
+        "cold": 95,
+        "rainy": 95
+      },
+      "paletteKey": "warm",
+      "ingredients": [
+        {
+          "item": "Abóbora",
+          "quantity": 600,
+          "unit": "g"
+        },
+        {
+          "item": "Cebola",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Gengibre",
+          "quantity": 2,
+          "unit": "cm"
+        },
+        {
+          "item": "Caldo de legumes",
+          "quantity": 700,
+          "unit": "ml"
+        },
+        {
+          "item": "Leite de coco",
+          "quantity": 100,
+          "unit": "ml"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Refogue a cebola e o gengibre ralado em azeite."
+        },
+        {
+          "number": 2,
+          "instruction": "Junte a abóbora em cubos e o caldo, cozinhe 20 minutos."
+        },
+        {
+          "number": 3,
+          "instruction": "Bata até ficar liso e volte à panela."
+        },
+        {
+          "number": 4,
+          "instruction": "Misture o leite de coco e acerte o sal."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "escondidinho-carne-seca",
+      "slug": "escondidinho-carne-seca",
+      "legacyIds": [],
+      "title": "Escondidinho de Carne Seca",
+      "description": "Domingo na mesa: purê macio por cima, sabor profundo por baixo.",
+      "imageUrl": null,
+      "prepTimeMinutes": 55,
+      "servings": 4,
+      "cuisine": "brasileira",
+      "mealTypes": [
+        "lunch",
+        "dinner"
+      ],
+      "dietaryTags": [
+        "gluten-free"
+      ],
+      "ingredientsTags": [
+        "carne",
+        "mandioca",
+        "queijo",
+        "leite"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 520
+      },
+      "traits": {
+        "comfort": 100,
+        "lightness": 20,
+        "protein": 70,
+        "cost": 50,
+        "novelty": 20
+      },
+      "weatherAffinity": {
+        "hot": 0,
+        "mild": 25,
+        "cold": 100,
+        "rainy": 90
+      },
+      "paletteKey": "earth",
+      "ingredients": [
+        {
+          "item": "Carne seca dessalgada e desfiada",
+          "quantity": 300,
+          "unit": "g"
+        },
+        {
+          "item": "Mandioca",
+          "quantity": 700,
+          "unit": "g"
+        },
+        {
+          "item": "Cebola",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Leite",
+          "quantity": 100,
+          "unit": "ml"
+        },
+        {
+          "item": "Queijo coalho ralado",
+          "quantity": 100,
+          "unit": "g"
+        },
+        {
+          "item": "Manteiga",
+          "quantity": 2,
+          "unit": "colheres de sopa"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Cozinhe a mandioca até desmanchar, amasse com o leite e a manteiga."
+        },
+        {
+          "number": 2,
+          "instruction": "Refogue a cebola e a carne seca desfiada até dourar."
+        },
+        {
+          "number": 3,
+          "instruction": "Monte em camadas: carne no fundo, purê por cima."
+        },
+        {
+          "number": 4,
+          "instruction": "Cubra com queijo e leve ao forno a 200 °C até gratinar."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "tacos-feijao-preto",
+      "slug": "tacos-feijao-preto",
+      "legacyIds": [],
+      "title": "Tacos de Feijão-preto e Abacate",
+      "description": "Prático, colorido e com um toque de limão.",
+      "imageUrl": null,
+      "prepTimeMinutes": 20,
+      "servings": 2,
+      "cuisine": "mexicana",
+      "mealTypes": [
+        "dinner",
+        "lunch"
+      ],
+      "dietaryTags": [
+        "vegan",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "feijão",
+        "abacate",
+        "milho",
+        "tortilha"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 400
+      },
+      "traits": {
+        "comfort": 60,
+        "lightness": 60,
+        "protein": 40,
+        "cost": 25,
+        "novelty": 55
+      },
+      "weatherAffinity": {
+        "hot": 75,
+        "mild": 75,
+        "cold": 35,
+        "rainy": 30
+      },
+      "paletteKey": "tomato",
+      "ingredients": [
+        {
+          "item": "Feijão-preto cozido",
+          "quantity": 1,
+          "unit": "xícara"
+        },
+        {
+          "item": "Tortilhas de milho",
+          "quantity": 4,
+          "unit": "un"
+        },
+        {
+          "item": "Abacate",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Tomate",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Coentro",
+          "quantity": 2,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Limão",
+          "quantity": 1,
+          "unit": "un"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Amasse parcialmente o feijão e tempere com cominho e sal."
+        },
+        {
+          "number": 2,
+          "instruction": "Faça um guacamole simples: abacate, limão, sal e coentro."
+        },
+        {
+          "number": 3,
+          "instruction": "Corte o tomate em cubos pequenos."
+        },
+        {
+          "number": 4,
+          "instruction": "Aqueça as tortilhas, monte os tacos e sirva com limão."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "lasanha-berinjela",
+      "slug": "lasanha-berinjela",
+      "legacyIds": [],
+      "title": "Lasanha de Berinjela",
+      "description": "Sem massa, com todo o molho e o queijo derretido.",
+      "imageUrl": null,
+      "prepTimeMinutes": 50,
+      "servings": 4,
+      "cuisine": "italiana",
+      "mealTypes": [
+        "dinner"
+      ],
+      "dietaryTags": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredientsTags": [
+        "berinjela",
+        "queijo",
+        "tomate",
+        "leite"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 360
+      },
+      "traits": {
+        "comfort": 80,
+        "lightness": 45,
+        "protein": 45,
+        "cost": 45,
+        "novelty": 40
+      },
+      "weatherAffinity": {
+        "hot": 15,
+        "mild": 55,
+        "cold": 85,
+        "rainy": 75
+      },
+      "paletteKey": "tomato",
+      "ingredients": [
+        {
+          "item": "Berinjela",
+          "quantity": 3,
+          "unit": "un"
+        },
+        {
+          "item": "Molho de tomate",
+          "quantity": 400,
+          "unit": "g"
+        },
+        {
+          "item": "Muçarela",
+          "quantity": 200,
+          "unit": "g"
+        },
+        {
+          "item": "Ricota",
+          "quantity": 150,
+          "unit": "g"
+        },
+        {
+          "item": "Manjericão",
+          "quantity": 1,
+          "unit": "punhado"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Corte a berinjela em fatias longas, salgue e deixe 10 minutos; seque bem."
+        },
+        {
+          "number": 2,
+          "instruction": "Grelhe ou asse as fatias até dourarem."
+        },
+        {
+          "number": 3,
+          "instruction": "Monte camadas de berinjela, molho, ricota e muçarela."
+        },
+        {
+          "number": 4,
+          "instruction": "Asse a 200 °C por 25 minutos e finalize com manjericão."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "espaguete-camarao-alho",
+      "slug": "espaguete-camarao-alho",
+      "legacyIds": [],
+      "title": "Espaguete com Camarão e Alho",
+      "description": "Elegante, rápido e com cheiro de restaurante.",
+      "imageUrl": null,
+      "prepTimeMinutes": 20,
+      "servings": 2,
+      "cuisine": "italiana",
+      "mealTypes": [
+        "dinner",
+        "lunch"
+      ],
+      "dietaryTags": [
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "camarão",
+        "massa",
+        "alho",
+        "trigo",
+        "gluten",
+        "frutos do mar"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 470
+      },
+      "traits": {
+        "comfort": 55,
+        "lightness": 60,
+        "protein": 80,
+        "cost": 85,
+        "novelty": 60
+      },
+      "weatherAffinity": {
+        "hot": 60,
+        "mild": 80,
+        "cold": 50,
+        "rainy": 40
+      },
+      "paletteKey": "sea",
+      "ingredients": [
+        {
+          "item": "Espaguete",
+          "quantity": 200,
+          "unit": "g"
+        },
+        {
+          "item": "Camarão limpo",
+          "quantity": 250,
+          "unit": "g"
+        },
+        {
+          "item": "Alho",
+          "quantity": 4,
+          "unit": "dentes"
+        },
+        {
+          "item": "Azeite",
+          "quantity": 3,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Limão",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Salsinha",
+          "quantity": 2,
+          "unit": "colheres de sopa"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Cozinhe o espaguete e guarde um pouco da água."
+        },
+        {
+          "number": 2,
+          "instruction": "Doure o alho no azeite e junte os camarões; cozinhe 2 minutos de cada lado."
+        },
+        {
+          "number": 3,
+          "instruction": "Misture a massa, um pouco da água e o suco do limão."
+        },
+        {
+          "number": 4,
+          "instruction": "Finalize com salsinha."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "moqueca-peixe",
+      "slug": "moqueca-peixe",
+      "legacyIds": [],
+      "title": "Moqueca de Peixe",
+      "description": "Capixaba, aromática e perfeita para dividir.",
+      "imageUrl": null,
+      "prepTimeMinutes": 40,
+      "servings": 3,
+      "cuisine": "brasileira",
+      "mealTypes": [
+        "lunch",
+        "dinner"
+      ],
+      "dietaryTags": [
+        "gluten-free",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "peixe",
+        "coco",
+        "tomate",
+        "pimentão"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 430
+      },
+      "traits": {
+        "comfort": 75,
+        "lightness": 55,
+        "protein": 85,
+        "cost": 65,
+        "novelty": 50
+      },
+      "weatherAffinity": {
+        "hot": 45,
+        "mild": 80,
+        "cold": 65,
+        "rainy": 70
+      },
+      "paletteKey": "saffron",
+      "ingredients": [
+        {
+          "item": "Posta de peixe branco",
+          "quantity": 500,
+          "unit": "g"
+        },
+        {
+          "item": "Leite de coco",
+          "quantity": 200,
+          "unit": "ml"
+        },
+        {
+          "item": "Tomate",
+          "quantity": 2,
+          "unit": "un"
+        },
+        {
+          "item": "Pimentão",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Cebola",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Coentro",
+          "quantity": 3,
+          "unit": "colheres de sopa"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Tempere o peixe com limão e sal por 15 minutos."
+        },
+        {
+          "number": 2,
+          "instruction": "Monte camadas de cebola, tomate e pimentão numa panela larga."
+        },
+        {
+          "number": 3,
+          "instruction": "Disponha o peixe, regue com leite de coco e azeite de dendê, se gostar."
+        },
+        {
+          "number": 4,
+          "instruction": "Cozinhe tampado 15 minutos sem mexer, e finalize com coentro."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "panqueca-espinafre-ricota",
+      "slug": "panqueca-espinafre-ricota",
+      "legacyIds": [],
+      "title": "Panqueca de Espinafre e Ricota",
+      "description": "Recheio leve, massa fininha, tudo coberto de molho.",
+      "imageUrl": null,
+      "prepTimeMinutes": 35,
+      "servings": 3,
+      "cuisine": "italiana",
+      "mealTypes": [
+        "dinner",
+        "lunch"
+      ],
+      "dietaryTags": [
+        "vegetarian"
+      ],
+      "ingredientsTags": [
+        "espinafre",
+        "ricota",
+        "ovo",
+        "leite",
+        "trigo",
+        "gluten"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 330
+      },
+      "traits": {
+        "comfort": 75,
+        "lightness": 50,
+        "protein": 45,
+        "cost": 30,
+        "novelty": 20
+      },
+      "weatherAffinity": {
+        "hot": 20,
+        "mild": 60,
+        "cold": 85,
+        "rainy": 75
+      },
+      "paletteKey": "fresh",
+      "ingredients": [
+        {
+          "item": "Farinha de trigo",
+          "quantity": 1,
+          "unit": "xícara"
+        },
+        {
+          "item": "Leite",
+          "quantity": 1,
+          "unit": "xícara"
+        },
+        {
+          "item": "Ovo",
+          "quantity": 2,
+          "unit": "un"
+        },
+        {
+          "item": "Espinafre refogado",
+          "quantity": 1,
+          "unit": "xícara"
+        },
+        {
+          "item": "Ricota",
+          "quantity": 200,
+          "unit": "g"
+        },
+        {
+          "item": "Molho de tomate",
+          "quantity": 300,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Bata farinha, leite e ovos até virar uma massa lisa."
+        },
+        {
+          "number": 2,
+          "instruction": "Faça as panquecas em frigideira untada, finas e douradas."
+        },
+        {
+          "number": 3,
+          "instruction": "Misture o espinafre com a ricota e recheie as panquecas."
+        },
+        {
+          "number": 4,
+          "instruction": "Arrume em um refratário, cubra com molho e aqueça no forno por 10 minutos."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "ensopado-carne-legumes",
+      "slug": "ensopado-carne-legumes",
+      "legacyIds": [],
+      "title": "Ensopado de Carne com Legumes",
+      "description": "Cozinha devagar e rende mais do que parece.",
+      "imageUrl": null,
+      "prepTimeMinutes": 70,
+      "servings": 4,
+      "cuisine": "brasileira",
+      "mealTypes": [
+        "dinner",
+        "lunch"
+      ],
+      "dietaryTags": [
+        "gluten-free",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "carne",
+        "batata",
+        "cenoura",
+        "mandioca"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 460
+      },
+      "traits": {
+        "comfort": 100,
+        "lightness": 25,
+        "protein": 80,
+        "cost": 55,
+        "novelty": 15
+      },
+      "weatherAffinity": {
+        "hot": 0,
+        "mild": 25,
+        "cold": 100,
+        "rainy": 95
+      },
+      "paletteKey": "cozy",
+      "ingredients": [
+        {
+          "item": "Acém em cubos",
+          "quantity": 500,
+          "unit": "g"
+        },
+        {
+          "item": "Batata",
+          "quantity": 2,
+          "unit": "un"
+        },
+        {
+          "item": "Cenoura",
+          "quantity": 2,
+          "unit": "un"
+        },
+        {
+          "item": "Cebola",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Extrato de tomate",
+          "quantity": 1,
+          "unit": "colher de sopa"
+        },
+        {
+          "item": "Água",
+          "quantity": 700,
+          "unit": "ml"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Doure a carne em panela quente, em lotes."
+        },
+        {
+          "number": 2,
+          "instruction": "Refogue a cebola, junte o extrato de tomate e volte a carne."
+        },
+        {
+          "number": 3,
+          "instruction": "Cubra com água e cozinhe tampado por 40 minutos."
+        },
+        {
+          "number": 4,
+          "instruction": "Adicione batata e cenoura e cozinhe mais 20 minutos, até tudo ficar macio."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "yakisoba-legumes",
+      "slug": "yakisoba-legumes",
+      "legacyIds": [],
+      "title": "Yakisoba de Legumes",
+      "description": "Salteado e vivo, pronto na velocidade da frigideira.",
+      "imageUrl": null,
+      "prepTimeMinutes": 25,
+      "servings": 2,
+      "cuisine": "japonesa",
+      "mealTypes": [
+        "dinner",
+        "lunch"
+      ],
+      "dietaryTags": [
+        "vegan",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "macarrão",
+        "repolho",
+        "cenoura",
+        "soja",
+        "trigo",
+        "gluten"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 380
+      },
+      "traits": {
+        "comfort": 55,
+        "lightness": 65,
+        "protein": 25,
+        "cost": 25,
+        "novelty": 55
+      },
+      "weatherAffinity": {
+        "hot": 55,
+        "mild": 75,
+        "cold": 55,
+        "rainy": 50
+      },
+      "paletteKey": "night",
+      "ingredients": [
+        {
+          "item": "Macarrão para yakisoba",
+          "quantity": 250,
+          "unit": "g"
+        },
+        {
+          "item": "Repolho",
+          "quantity": 2,
+          "unit": "xícaras"
+        },
+        {
+          "item": "Cenoura",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Brócolis",
+          "quantity": 1,
+          "unit": "xícara"
+        },
+        {
+          "item": "Shoyu",
+          "quantity": 3,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Óleo de gergelim",
+          "quantity": 1,
+          "unit": "colher de chá"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Corte os legumes em tiras finas."
+        },
+        {
+          "number": 2,
+          "instruction": "Cozinhe o macarrão conforme a embalagem e escorra."
+        },
+        {
+          "number": 3,
+          "instruction": "Salteie os legumes em fogo alto por 3 minutos."
+        },
+        {
+          "number": 4,
+          "instruction": "Junte o macarrão e o shoyu, misture e finalize com gergelim."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "frango-curry-arroz",
+      "slug": "frango-curry-arroz",
+      "legacyIds": [],
+      "title": "Frango ao Curry com Arroz",
+      "description": "Doce e picante, com molho para o arroz inteiro.",
+      "imageUrl": null,
+      "prepTimeMinutes": 30,
+      "servings": 2,
+      "cuisine": "indiana",
+      "mealTypes": [
+        "dinner",
+        "lunch"
+      ],
+      "dietaryTags": [
+        "gluten-free",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "frango",
+        "curry",
+        "coco",
+        "carne"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 520
+      },
+      "traits": {
+        "comfort": 85,
+        "lightness": 40,
+        "protein": 90,
+        "cost": 45,
+        "novelty": 50
+      },
+      "weatherAffinity": {
+        "hot": 25,
+        "mild": 60,
+        "cold": 85,
+        "rainy": 80
+      },
+      "paletteKey": "saffron",
+      "ingredients": [
+        {
+          "item": "Peito de frango em cubos",
+          "quantity": 350,
+          "unit": "g"
+        },
+        {
+          "item": "Cebola",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Curry em pó",
+          "quantity": 2,
+          "unit": "colheres de chá"
+        },
+        {
+          "item": "Leite de coco",
+          "quantity": 150,
+          "unit": "ml"
+        },
+        {
+          "item": "Arroz cozido",
+          "quantity": 2,
+          "unit": "xícaras"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Doure o frango em fogo alto."
+        },
+        {
+          "number": 2,
+          "instruction": "Junte a cebola picada e o curry e refogue por 2 minutos."
+        },
+        {
+          "number": 3,
+          "instruction": "Adicione o leite de coco e cozinhe 10 minutos."
+        },
+        {
+          "number": 4,
+          "instruction": "Sirva com arroz."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "bolo-caneca-chocolate",
+      "slug": "bolo-caneca-chocolate",
+      "legacyIds": [],
+      "title": "Bolo de Caneca de Chocolate",
+      "description": "Pra quando bate a vontade — pronto em 3 minutos.",
+      "imageUrl": null,
+      "prepTimeMinutes": 5,
+      "servings": 1,
+      "cuisine": "internacional",
+      "mealTypes": [
+        "snack"
+      ],
+      "dietaryTags": [
+        "vegetarian"
+      ],
+      "ingredientsTags": [
+        "chocolate",
+        "ovo",
+        "farinha",
+        "trigo",
+        "gluten",
+        "leite"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 360
+      },
+      "traits": {
+        "comfort": 95,
+        "lightness": 20,
+        "protein": 20,
+        "cost": 15,
+        "novelty": 15
+      },
+      "weatherAffinity": {
+        "hot": 20,
+        "mild": 55,
+        "cold": 90,
+        "rainy": 85
+      },
+      "paletteKey": "earth",
+      "ingredients": [
+        {
+          "item": "Farinha de trigo",
+          "quantity": 3,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Cacau em pó",
+          "quantity": 2,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Ovo",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Leite",
+          "quantity": 3,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Açúcar",
+          "quantity": 2,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Óleo",
+          "quantity": 1,
+          "unit": "colher de sopa"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Misture os secos numa caneca grande."
+        },
+        {
+          "number": 2,
+          "instruction": "Junte ovo, leite e óleo e mexa até ficar liso."
+        },
+        {
+          "number": 3,
+          "instruction": "Leve ao micro-ondas por 1 minuto e 30 segundos."
+        },
+        {
+          "number": 4,
+          "instruction": "Espere 1 minuto antes de comer."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "homus-crudites",
+      "slug": "homus-crudites",
+      "legacyIds": [],
+      "title": "Homus com Palitos de Legumes",
+      "description": "Cremoso, crocante e saciante, sem fogo.",
+      "imageUrl": null,
+      "prepTimeMinutes": 10,
+      "servings": 2,
+      "cuisine": "mediterrânea",
+      "mealTypes": [
+        "snack"
+      ],
+      "dietaryTags": [
+        "vegan",
+        "gluten-free",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "grão-de-bico",
+        "tahine",
+        "cenoura",
+        "pepino"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 220
+      },
+      "traits": {
+        "comfort": 25,
+        "lightness": 90,
+        "protein": 40,
+        "cost": 25,
+        "novelty": 45
+      },
+      "weatherAffinity": {
+        "hot": 85,
+        "mild": 75,
+        "cold": 20,
+        "rainy": 15
+      },
+      "paletteKey": "fresh",
+      "ingredients": [
+        {
+          "item": "Grão-de-bico cozido",
+          "quantity": 1,
+          "unit": "xícara"
+        },
+        {
+          "item": "Tahine",
+          "quantity": 2,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Limão",
+          "quantity": 1,
+          "unit": "un"
+        },
+        {
+          "item": "Alho",
+          "quantity": 1,
+          "unit": "dente"
+        },
+        {
+          "item": "Cenoura e pepino",
+          "quantity": 2,
+          "unit": "un"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Bata o grão-de-bico com tahine, limão, alho e um pouco de água até ficar cremoso."
+        },
+        {
+          "number": 2,
+          "instruction": "Acerte o sal e regue com azeite."
+        },
+        {
+          "number": 3,
+          "instruction": "Corte a cenoura e o pepino em palitos."
+        },
+        {
+          "number": 4,
+          "instruction": "Sirva para mergulhar."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "queijo-coalho-mel",
+      "slug": "queijo-coalho-mel",
+      "legacyIds": [],
+      "title": "Queijo Coalho Grelhado com Mel",
+      "description": "Salgado, doce e quentinho. Um lanche de beira de praia.",
+      "imageUrl": null,
+      "prepTimeMinutes": 8,
+      "servings": 2,
+      "cuisine": "brasileira",
+      "mealTypes": [
+        "snack"
+      ],
+      "dietaryTags": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredientsTags": [
+        "queijo",
+        "leite",
+        "mel"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 250
+      },
+      "traits": {
+        "comfort": 60,
+        "lightness": 40,
+        "protein": 50,
+        "cost": 35,
+        "novelty": 20
+      },
+      "weatherAffinity": {
+        "hot": 65,
+        "mild": 70,
+        "cold": 50,
+        "rainy": 45
+      },
+      "paletteKey": "morning",
+      "ingredients": [
+        {
+          "item": "Queijo coalho em espetos",
+          "quantity": 4,
+          "unit": "un"
+        },
+        {
+          "item": "Mel",
+          "quantity": 2,
+          "unit": "colheres de sopa"
+        },
+        {
+          "item": "Orégano",
+          "quantity": 1,
+          "unit": "pitada"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Aqueça uma chapa ou frigideira antiaderente."
+        },
+        {
+          "number": 2,
+          "instruction": "Grelhe os espetos até dourarem dos dois lados."
+        },
+        {
+          "number": 3,
+          "instruction": "Regue com mel e polvilhe o orégano."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "cookie-aveia-banana",
+      "slug": "cookie-aveia-banana",
+      "legacyIds": [],
+      "title": "Cookie de Aveia e Banana",
+      "description": "Dois ingredientes, assa em 12 minutos e perfuma a casa.",
+      "imageUrl": null,
+      "prepTimeMinutes": 20,
+      "servings": 4,
+      "cuisine": "internacional",
+      "mealTypes": [
+        "snack",
+        "breakfast"
+      ],
+      "dietaryTags": [
+        "vegan",
+        "lactose-free"
+      ],
+      "ingredientsTags": [
+        "banana",
+        "aveia",
+        "chocolate"
+      ],
+      "allergens": [],
+      "nutrition": {
+        "calories": 120
+      },
+      "traits": {
+        "comfort": 60,
+        "lightness": 60,
+        "protein": 15,
+        "cost": 10,
+        "novelty": 20
+      },
+      "weatherAffinity": {
+        "hot": 40,
+        "mild": 70,
+        "cold": 65,
+        "rainy": 60
+      },
+      "paletteKey": "morning",
+      "ingredients": [
+        {
+          "item": "Banana madura",
+          "quantity": 2,
+          "unit": "un"
+        },
+        {
+          "item": "Aveia em flocos",
+          "quantity": 1,
+          "unit": "xícara"
+        },
+        {
+          "item": "Gotas de chocolate",
+          "quantity": 3,
+          "unit": "colheres de sopa"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "instruction": "Amasse as bananas e misture com a aveia e o chocolate."
+        },
+        {
+          "number": 2,
+          "instruction": "Modele bolinhas achatadas numa assadeira forrada."
+        },
+        {
+          "number": 3,
+          "instruction": "Asse a 180 °C por 12 minutos, até firmar."
+        },
+        {
+          "number": 4,
+          "instruction": "Deixe esfriar para ficarem crocantes."
+        }
+      ],
+      "publishedAt": "2026-01-01T00:00:00.000Z"
+    }
+  ]
+}

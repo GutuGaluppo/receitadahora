@@ -6,7 +6,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   root: "src/client",
   plugins: [react(), tailwindcss()],
-  resolve: { alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) } },
+  resolve: { alias: { "@contracts": fileURLToPath(new URL("../contracts", import.meta.url)), "@": fileURLToPath(new URL("./src", import.meta.url)) } },
   build: { outDir: "../../dist/client", emptyOutDir: true },
   // o front conversa com o Worker local (wrangler dev) na 8788
   server: { port: 5174, proxy: { "/api": "http://localhost:8788" } },

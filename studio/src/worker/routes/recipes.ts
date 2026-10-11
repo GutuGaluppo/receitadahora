@@ -6,6 +6,7 @@ import { fail, parseBody } from "../lib/http";
 import { now } from "../lib/ids";
 import { matchIngredient } from "../lib/matching";
 import { buildImagePrompt } from "../lib/prompt";
+import { metadataInput } from "../lib/metadata";
 import { publishBlockers } from "../lib/publish";
 import { createRecipe, recipeInput, updateRecipe, type SaveResult } from "../lib/recipes";
 import { fingerprints, getRecipeFull, loadLibrary, refreshRecipeStatus } from "../lib/repo";
@@ -108,6 +109,27 @@ recipes.put("/:id", async (c) => {
   } catch (e) {
     return fail(c, 422, "validation", e instanceof Error ? e.message : "Dados inválidos.");
   }
+});
+
+/* PUT /api/recipes/:id/metadata — confirmação humana dos metadados de recomendação (inclui alérgenos). */
+recipes.put("/:id/metadata", async (c) => {
+  const body = await parseBody(c, metadataInput);
+  if (!body.ok) return body.res;
+  const id = c.req.param("id");
+  const exists = await c.env.DB.prepare("SELECT id FROM recipes WHERE id = ? AND deleted_at IS NULL").bind(id).first();
+  if (!exists) return fail(c, 404, "not_found", "Receita não encontrada.");
+  const m = body.data;
+  // O 1º item de ingredients_tags é o ingrediente principal: normaliza sem duplicatas preservando a ordem.
+  const tags = [...new Set(m.ingredients_tags.map((t) => t.toLocaleLowerCase("pt-BR")))];
+  await c.env.DB.prepare(
+    `UPDATE recipes SET meal_types = ?, dietary_tags = ?, allergens = ?, ingredients_tags = ?, cuisine = ?, traits = ?, weather_affinity = ?,
+            palette_key = ?, nutrition = ?, featured = ?, legacy_ids = ?, metadata_reviewed_by = ?, metadata_reviewed_at = ?, updated_at = ? WHERE id = ?`,
+  ).bind(
+    JSON.stringify(m.meal_types), JSON.stringify(m.dietary_tags), JSON.stringify(m.allergens), JSON.stringify(tags), m.cuisine,
+    JSON.stringify(m.traits), JSON.stringify(m.weather_affinity), m.palette_key, m.nutrition ? JSON.stringify(m.nutrition) : null,
+    m.featured ? 1 : 0, JSON.stringify(m.legacy_ids), c.get("user"), now(), now(), id,
+  ).run();
+  return c.json({ ok: true });
 });
 
 /* DELETE — soft delete. Receita publicada precisa ser despublicada antes. */

@@ -24,7 +24,8 @@ function qty(q: number): string {
 function ingredientLine(i: Recipe["ingredients"][number]): string {
   const lower = `${i.item.charAt(0).toLowerCase()}${i.item.slice(1)}`;
   let line: string;
-  if (i.unit === "a gosto") line = `${i.item} a gosto`;
+  // quantity null (ou unidade "a gosto") nunca vira "0 g": é "a gosto".
+  if (i.quantity === null || i.unit === "a gosto") line = `${i.item} a gosto`;
   else if (i.unit === "un" || i.unit === "") line = `${qty(i.quantity)} ${lower}`;
   else line = `${qty(i.quantity)} ${i.unit} de ${lower}`;
   return i.optional ? `${line} (opcional)` : line;
